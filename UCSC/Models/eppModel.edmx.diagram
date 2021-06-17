@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f134f15321d4a149bfc62a84010bd28" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="gestion_eppModel.Categoria" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_eppModel.DetalleEntrada" Width="1.5" PointX="8.125" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_eppModel.DetalleSalida" Width="1.5" PointX="6.375" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_eppModel.EPP" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_eppModel.Estado" Width="1.5" PointX="0.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_eppModel.OrdenEntrada" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_eppModel.OrdenSalida" Width="1.5" PointX="3.125" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_eppModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_eppModel.Usuario" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="gestion_eppModel.FK_Producto_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK_DetalleEntrada_OrdenEntrada" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK_DetalleEntrada_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK_DatalleSalida_OrdenSalida" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK__EPP__estado__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK_Producto_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK_OrdenEntrada_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK_OrdenSalida_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK_OrdenSalida_Usuario1" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_eppModel.FK_Usuario_TipoUsuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
