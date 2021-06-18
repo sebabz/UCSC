@@ -38,12 +38,12 @@
                     </li>
                     <!--Agregar links al menú -->
                     @*<li>
-                        <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Marcas</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "Marcas")">Crear Marca</a></li>
-                            <li><a href="@Url.Action("Index", "Marcas")">Lista Marcas</a></li>
-                        </ul>
-                    </li>*@
+            <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Marcas</span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                <li><a href="@Url.Action("Create", "Marcas")">Crear Marca</a></li>
+                <li><a href="@Url.Action("Index", "Marcas")">Lista Marcas</a></li>
+            </ul>
+        </li>*@
                     <li>
                         <a href="#"><i class="fa fa-address-book"></i><span class="nav-label">Categorías</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
@@ -56,6 +56,13 @@
                         <ul class="nav nav-second-level collapse">
                             <li><a href="@Url.Action("Create", "EPP")">Crear EPP</a></li>
                             <li><a href="@Url.Action("Index","EPP")">Lista EPP</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i><span class="nav-label">Tipos de Usuario</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("Create", "TipoUsuario")">Crear Tipo de Usuario</a></li>
+                            <li><a href="@Url.Action("Index","TipoUsuario")">Listar Tipos de Usuarios</a></li>
                         </ul>
                     </li>
                 </ul>

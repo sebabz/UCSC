@@ -1,0 +1,27 @@
+﻿@model UCSC.Models.TipoUsuario
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Eliminar Tipo de Usuario</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form action="@Url.Action("Delete","TipoUsuario")" method="post">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type="hidden" name="id_tipo" value="@Model.id_tipo" />
+                <h2>¿Desea eliminar la marca @Model.nombre ?</h2>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <input type="submit" value="Eliminar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

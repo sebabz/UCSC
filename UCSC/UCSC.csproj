@@ -164,6 +164,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\EPPController.cs" />
+    <Compile Include="Controllers\TipousuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,6 +271,10 @@
     <Content Include="Views\EPP\Index.cshtml" />
     <Content Include="Views\EPP\Create.cshtml" />
     <Content Include="Views\EPP\_Edit.cshtml" />
+    <Content Include="Views\Tipousuario\Index.cshtml" />
+    <Content Include="Views\Tipousuario\Create.cshtml" />
+    <Content Include="Views\Tipousuario\_Edit.cshtml" />
+    <Content Include="Views\Tipousuario\_Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
