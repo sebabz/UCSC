@@ -165,6 +165,7 @@
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\EPPController.cs" />
     <Compile Include="Controllers\TipousuarioController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,6 +277,10 @@
     <Content Include="Views\Tipousuario\_Edit.cshtml" />
     <Content Include="Views\Tipousuario\_Delete.cshtml" />
     <Content Include="Views\EPP\_Delete.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\_Edit.cshtml" />
+    <Content Include="Views\Usuarios\_Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

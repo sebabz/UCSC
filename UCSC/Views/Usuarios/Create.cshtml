@@ -1,15 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "Agregar EPP";
+    ViewBag.Title = "Agregar Usuario";
 }
 <div class="row wrapper border-bottom white-bg page-heading">
-    <h2>Crear EPP</h2>
+    <h2>Crear Usuario</h2>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox-title">
-                <h3>Ingrese los datos del EPP a crear</h3>
+                <h3>Ingrese los datos del Usuario a crear</h3>
             </div>
             <div class="ibox-content">
 
@@ -21,33 +21,31 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 text-right">Código:</label>
+                    <label class="col-2 text-right">Apellido:</label>
                     <div class="col-10">
-                        <input type="text" name="codigo" id="codigo" class="form-control form-control-sm" />
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-2 text-right">Categoría:</label>
-                    <div class="col-10">
-                        <!--Helper de razor para select -->
-                        @Html.DropDownList("categoria", null, "Seleccione Categoría", htmlAttributes: new { @class = "form-control select2" })
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-2 text-right">Usuario:</label>
-                    <div class="col-10">
-                        <!--Helper de razor para select -->
-                        @Html.DropDownList("usuario", null, "Seleccione Usuario", htmlAttributes: new { @class = "form-control select2" })
+                        <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" />
                     </div>
                 </div>
 
 
+                <div class="form-group row">
+                    <label class="col-2 text-right">Rut:</label>
+                    <div class="col-10">
+                        <input type="text" name="rut" id="rut" class="form-control form-control-sm" />
+                    </div>
+                </div>
 
                 <div class="form-group row">
-                    <label class="col-2 text-right">Cantidad:</label>
+                    <label class="col-2 text-right">E-mail:</label>
                     <div class="col-10">
-                        <input type="number" name="cantidad" id="cantidad" class="form-control form-control-sm solonumeros" />
+                        <input type="email" name="email" id="email" class="form-control form-control-sm" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 text-right">Contraseña:</label>
+                    <div class="col-10">
+                        <input type="password" name="pass" id="pass" class="form-control form-control-sm" />
                     </div>
                 </div>
 
@@ -57,15 +55,16 @@
                         <input type="text" name="estado" id="estado" class="form-control form-control-sm" />
                     </div>
                 </div>
-
-
-
+                               
                 <div class="form-group row">
-                    <label class="col-2 text-right">Comentario:</label>
+                    <label class="col-2 text-right">Usuario:</label>
                     <div class="col-10">
-                        <textarea name="comentario" id="comentario" class="form-control form-control-sm"></textarea>
+                        <!--Helper de razor para select -->
+                        @Html.DropDownList("tipoUsuario", null, "Seleccione Tipo de Usuario", htmlAttributes: new { @class = "form-control select2" })
                     </div>
                 </div>
+
+
                 <div class="text-center">
                     <input type="button" value="Limpiar" id="limpiar" class="btn btn-secondary" />
                     <input type="button" value="Guardar" id="guardar" class="btn btn-primary" />
@@ -93,8 +92,7 @@
 
         if ($('#nombre').val().trim() === '')
             error += 'Debe ingresar nombre \n';
-        if ($('#codigo').val().trim() === '')
-            error += 'Debe ingresar código \n';
+        
 
 
         if (error != '') {
@@ -105,26 +103,25 @@
             const data = {
 
                 nombre: $('#nombre').val().trim(),
-                codigo: $('#codigo').val().trim(),
-                cantidad: $('#cantidad').val(),
-                comentario: $('#comentario').val().trim(),
-                id_categoria: $('#categoria').val(),
-                id_user: $('#usuario').val(),
-                estado: $('#estado').val().trim()
-
+                apellido: $('#apellido').val().trim(),
+                rut: $('#rut').val().trim(),
+                email: $('#email').val().trim(),
+                pass: $('#pass').val().trim(),
+                estado: $('#estado').val().trim(),
+                id_tipo: $('#tipoUsuario').val()
 
             }
             //se enviarán los datos al controlador a través de ajax
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("Create")',
-                data: '{epp:' + JSON.stringify(data) + '}',
+                data: '{usuario:' + JSON.stringify(data) + '}',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (ok) {
                     if (ok === '') {
                         swal({
-                            title: 'Creación EPP',
+                            title: 'Creación Usuario',
                             text: 'Los datos se han guardado con éxito!',
                             icon: 'success',
                             button: 'Cerrar',
@@ -132,7 +129,7 @@
                         }).then(function (isConfirm) {
                             if (isConfirm) {
                                 location.reload();//recarga la página
-                               
+
                             }
                         });
                     } else {
@@ -167,13 +164,15 @@
     });
 
     function limpiar() {
+
         $('#nombre').val('');
-        $('#codigo').val('');
-        $('#cantidad').val('');
-        $('#comentario').val('');
-        $('#usuario').val(0);
-        $('#categoria').val(0);
+        $('#apellido').val('');
+        $('#rut').val('');
+        $('#email').val('');
+        $('#pass').val('');
         $('#estado').val('');
+        $('#id_tipo').val('');
+
     }
 </script>
 

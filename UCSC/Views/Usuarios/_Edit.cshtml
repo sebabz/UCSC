@@ -1,30 +1,16 @@
-﻿@model UCSC.Models.EPP
+﻿@model UCSC.Models.Usuario
 
 
 <div class="modal-dialog">
     <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title">Detalle EPP</h4>
+            <h4 class="modal-title">Detalle Usuario</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
-            <input type="hidden" id="id_epp" value="@Model.id_epp" />
-
-            <div class="form-group row">
-                <label class="col-2 text-right">Categoria:</label>
-                <div class="col-10">
-                    @Html.DropDownList("categoria", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-2 text-right">Usuario:</label>
-                <div class="col-10">
-                    @Html.DropDownList("usuario", null, htmlAttributes: new { @class = "form-control" })
-                </div>
-            </div>
+            <input type="hidden" id="id_usuario" value="@Model.id_usuario" />
 
             <div class="form-group row">
                 <label class="col-2 text-right">Nombre:</label>
@@ -32,32 +18,49 @@
                     <input type="text" name="nombre" id="nombre" value="@Model.nombre" class="form-control" />
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-2 text-right">Código:</label>
+                <label class="col-2 text-right">Apellido:</label>
                 <div class="col-10">
-                    <input type="text" name="codigo" id="codigo" value="@Model.codigo" class="form-control" />
+                    <input type="text" name="apellido" id="apellido" value="@Model.apellido" class="form-control" />
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-2 text-right">Cantidad:</label>
+                <label class="col-2 text-right">Rut:</label>
                 <div class="col-10">
-                    <input type="number" name="cantidad" id="cantidad" value="@Model.cantidad" class="form-control solonumeros" />
+                    <input type="text" name="rut" id="rut" value="@Model.rut" class="form-control" />
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label class="col-2 text-right">E-Mail:</label>
+                <div class="col-10">
+                    <input type="email" name="email" id="email" value="@Model.email" class="form-control" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Contraseña:</label>
+                <div class="col-10">
+                    <input type="email" name="pass" id="pass" value="@Model.pass" class="form-control" />
+                </div>
+            </div>
+
+
             <div class="form-group row">
                 <label class="col-2 text-right">Estado:</label>
                 <div class="col-10">
-                    <input type="text" name="estado" id="estado" value="@Model.estado" class="form-control solonumeros" />
+                    <input type="text" name="estado" id="estado" value="@Model.estado" class="form-control" />
                 </div>
             </div>
 
 
-
             <div class="form-group row">
-                <label class="col-2 text-right">Comentario:</label>
+                <label class="col-2 text-right">Tipo Usuario:</label>
                 <div class="col-10">
-                    <!--Helper textarea para mostrar el valor en edit-->
-                    @Html.TextAreaFor(x => x.comentario, new { @class = "form-control" })
+                    @Html.DropDownList("tipo", null, htmlAttributes: new { @class = "form-control" })
                 </div>
             </div>
         </div>
@@ -73,41 +76,39 @@
 <script>
     $('#editar').click(function () {
         let error = '';
-        if (!$('#usuario').val())
-            error += 'Debe seleccionar usuario \n';
+
         if ($('#nombre').val() === '')
             error += 'Debe ingresar nombre \n';
-        if ($('#codigo').val() === '')
-            error += 'Debe ingresar código \n';
+
         if (error != '') {
             swal('Error validación', error, 'error');
         }
         else
         {
-            const epp = {
+            const usuario = {
 
-                id_epp: $('#id_epp').val(),
+                id_usuario: $('#id_usuario').val(),
                 nombre: $('#nombre').val().trim(),
-                codigo: $('#codigo').val(),
-                cantidad: $('#cantidad').val(),
-                comentario: $('#comentario').val(),
-                id_categoria: $('#categoria').val(),
-                id_user: $('#usuario').val(),
-                estado: $('#estado').val()
-                
+                apellido: $('#apellido').val().trim(),
+                rut: $('#rut').val().trim(),
+                email: $('#email').val().trim(),
+                pass: $('#pass').val().trim(),
+                estado: $('#estado').val().trim(),
+                id_tipo: $('#tipo').val()
+
             }
 
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("Edit")',
-                data: '{epp:' + JSON.stringify(epp) + '}',
+                data: '{usuario:' + JSON.stringify(usuario) + '}',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (resp) {
                     if (resp == "") {
                         $('#modalEdit').modal('hide');
                         swal({
-                            title: 'Modificar EPP',
+                            title: 'Modificar Usuario',
                             text: 'Los datos se han guardado con éxito!',
                             icon: 'success',
                             button: 'Cerrar',
