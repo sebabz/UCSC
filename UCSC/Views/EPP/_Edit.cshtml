@@ -1,5 +1,6 @@
 ﻿@model UCSC.Models.EPP
 
+
 <div class="modal-dialog">
     <div class="modal-content">
         <!-- Modal Header -->
@@ -7,30 +8,120 @@
             <h4 class="modal-title">Detalle EPP</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="@Url.Action("Edit","EPP")" method="post">
-            <!-- Modal body -->
-            <div class="modal-body">
-                <input type="hidden" name="id_epp" value="@Model.id_epp" />
-                <label> Nombre:</label>
-                <input type="text" name="nombre" value="@Model.nombre" class="form-control" />
-                <label> Codigo:</label>
-                <input type="text" name="codigo" value="@Model.codigo" class="form-control" />
-                <label> Categoria: </label>
-                
+        <!-- Modal body -->
+        <div class="modal-body">
+            <input type="hidden" id="id_epp" value="@Model.id_epp" />
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Categoria:</label>
+                <div class="col-10">
+                    @Html.DropDownList("categoria", null, htmlAttributes: new { @class = "form-control" })
                 </div>
-                <label> Cantidad:</label>
-                <input type="number" name="cantidad" id="cantidad" value="@Model.cantidad" class="form-control solonumeros" />
-                <label>Comentarios:</label>
-                <textarea name="comentario" id="comentario" class="form-control form-control-sm"></textarea>
-
-
             </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <input type="submit" value="Editar" class="btn btn-primary" />
+            <div class="form-group row">
+                <label class="col-2 text-right">Usuario:</label>
+                <div class="col-10">
+                    @Html.DropDownList("usuario", null, htmlAttributes: new { @class = "form-control" })
+                </div>
             </div>
-        </form>
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Nombre:</label>
+                <div class="col-10">
+                    <input type="text" name="nombre" id="nombre" value="@Model.nombre" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 text-right">Código:</label>
+                <div class="col-10">
+                    <input type="text" name="codigo" id="codigo" value="@Model.codigo" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 text-right">Cantidad:</label>
+                <div class="col-10">
+                    <input type="number" name="cantidad" id="cantidad" value="@Model.cantidad" class="form-control solonumeros" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 text-right">Estado:</label>
+                <div class="col-10">
+                    <input type="text" name="estado" id="estado" value="@Model.estado" class="form-control solonumeros" />
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Comentario:</label>
+                <div class="col-10">
+                    <!--Helper textarea para mostrar el valor en edit-->
+                    @Html.TextAreaFor(x => x.comentario, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <input type="button" value="Editar" class="btn btn-primary" id="editar" />
+        </div>
     </div>
 </div>
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+    $('#editar').click(function () {
+        let error = '';
+        if (!$('#usuario').val())
+            error += 'Debe seleccionar usuario \n';
+        if ($('#nombre').val() === '')
+            error += 'Debe ingresar nombre \n';
+        if ($('#codigo').val() === '')
+            error += 'Debe ingresar código \n';
+        if (error != '') {
+            swal('Error validación', error, 'error');
+        }
+        else
+        {
+            const epp = {
+
+                id_epp: $('#id_epp').val(),
+                nombre: $('#nombre').val().trim(),
+                codigo: $('#codigo').val(),
+                cantidad: $('#cantidad').val(),
+                comentario: $('#comentario').val(),
+                id_categoria: $('#categoria').val(),
+                id_user: $('#usuario').val(),
+                estado: $('#estado').val()
+                
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit")',
+                data: '{epp:' + JSON.stringify(epp) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (resp) {
+                    if (resp == "") {
+                        $('#modalEdit').modal('hide');
+                        swal({
+                            title: 'Modificar EPP',
+                            text: 'Los datos se han guardado con éxito!',
+                            icon: 'success',
+                            button: 'Cerrar',
+                            closeOnClickOutside: false,
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                cargarTabla();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+
+</script>

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using UCSC.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using UCSC.Models;
 
 namespace UCSC.Controllers
 {
@@ -46,12 +46,13 @@ namespace UCSC.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
            
             var epp = db.EPP.Find(id);
             
-            ViewBag.proveedor = new SelectList(db.Usuario, "id_usuario", "nombre", epp.id_user);
+            ViewBag.Usuario = new SelectList(db.Usuario, "id_usuario", "nombre", epp.id_user);
+            ViewBag.Categoria = new SelectList(db.Categoria, "id_categoria", "nombre", epp.id_user);
             return PartialView("_Edit", epp);
         }
         [HttpPost]
@@ -64,7 +65,23 @@ namespace UCSC.Controllers
         }
 
 
-
+        public ActionResult Delete(int id)
+        {
+            var epp = db.EPP.Find(id);
+            return PartialView("_Delete", epp);
+        }
+        [HttpPost]
+        public ActionResult Eliminar(int id)
+        {
+            var epp = db.EPP.Find(id);
+            if (epp != null)
+            {
+                db.EPP.Remove(epp);
+                db.SaveChanges();
+                return Json("");
+            }
+            return Json("No se ha podido eliminar el producto");
+        }
 
 
     }
