@@ -1,0 +1,25 @@
+﻿@model UCSC.Models.Categoria
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Eliminar Categoría</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form action="@Url.Action("Delete","Categorias")" method="post">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type="hidden" name="id" value="@Model.id_categoria" />
+                <h2>¿Desea eliminar la marca @Model.nombre ?</h2>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <input type="submit" value="Eliminar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

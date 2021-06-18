@@ -1,0 +1,36 @@
+﻿@model UCSC.Models.EPP
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Detalle EPP</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form action="@Url.Action("Edit","EPP")" method="post">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type="hidden" name="id_epp" value="@Model.id_epp" />
+                <label> Nombre:</label>
+                <input type="text" name="nombre" value="@Model.nombre" class="form-control" />
+                <label> Codigo:</label>
+                <input type="text" name="codigo" value="@Model.codigo" class="form-control" />
+                <label> Categoria: </label>
+                
+                </div>
+                <label> Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" value="@Model.cantidad" class="form-control solonumeros" />
+                <label>Comentarios:</label>
+                <textarea name="comentario" id="comentario" class="form-control form-control-sm"></textarea>
+
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <input type="submit" value="Editar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

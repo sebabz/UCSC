@@ -1,0 +1,81 @@
+﻿@model IEnumerable<UCSC.Models.EPP>
+
+@{
+    ViewBag.Title = "EPP";
+}
+
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+<h2>Gestionar EPP</h2>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox-title">
+                <h2>Lista de EPP</h2>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Codigo</th>
+                            <th>Cantidad</th>
+                            <th>Comentario</th>
+                            <th>Categoria</th>
+                            <th>Usuario</th>
+                            <th>Estado</th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.nombre</td>
+                                <td>@item.codigo</td>
+                                <td>@item.cantidad</td>
+                                <td>@item.comentario</td>
+                                <td>@item.Categoria.nombre</td>
+                                <td>@item.Usuario.nombre</td>
+                                <td>@item.estado</td>
+                                <td>
+                                    <button class="btn btn-warning" data-toggle="modal"
+                                            data-url="@Url.Action("Edit","EPP",new { id = item.id_epp })">
+                                        <i class="fa fa-edit"></i> Editar
+                                    </button>
+                                    <button class="btn btn-danger" data-toggle="modal"
+                                            data-url="@Url.Action("Delete","EPP", new { id = item.id_epp })">
+                                        <i class="fa fa-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalEdit"></div>
+<div class="modal fade" id="modalDelete"></div>
+<script>
+    $('.btn-warning').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function (data) {
+            $('#modalEdit').html(data);
+            $('#modalEdit').modal('show');
+        });
+    });
+    $('.btn-danger').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function (data) {
+            $('#modalDelete').html(data);
+            $('#modalDelete').modal('show');
+        });
+    });
+
+</script>
+
