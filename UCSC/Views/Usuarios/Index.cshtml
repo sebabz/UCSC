@@ -41,11 +41,11 @@
                                 <td>@item.TipoUsuario.nombre</td>
                                 <td>
                                     <button class="btn btn-warning" data-toggle="modal"
-                                            data-url="@Url.Action("Edit","Usuario",new { id = item.id_usuario})">
+                                            data-url="@Url.Action("Edit","Usuarios",new { id = item.id_usuario })">
                                         <i class="fa fa-edit"></i> Editar
                                     </button>
                                     <button class="btn btn-danger" data-toggle="modal"
-                                            data-url="@Url.Action("Delete","Usuario", new { id = item.id_usuario})">
+                                            data-url="@Url.Action("Delete","Usuarios", new { id = item.id_usuario })">
                                         <i class="fa fa-trash"></i> Eliminar
                                     </button>
                                 </td>

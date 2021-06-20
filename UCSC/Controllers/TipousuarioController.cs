@@ -11,7 +11,7 @@ namespace UCSC.Controllers
 
     public class TipousuarioController : Controller
     {
-        private gestion_eppEntities db = new gestion_eppEntities();
+        private gestion_eppEntities1 db = new gestion_eppEntities1();
         // GET: Tipousuario
         public ActionResult Index()
         {
@@ -44,7 +44,7 @@ namespace UCSC.Controllers
         {
             db.Entry(tipoUsuario).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json("");
         }
 
         public ActionResult Delete(int? id)
@@ -60,11 +60,18 @@ namespace UCSC.Controllers
         public ActionResult Delete(int id)
         {
             var tipoUsuario = db.TipoUsuario.Find(id);
-            db.TipoUsuario.Remove(tipoUsuario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            try
+            {
+                db.TipoUsuario.Remove(tipoUsuario);
+                db.SaveChanges();
+                return Json("");
+            }
 
+            catch (Exception)
+            {
+                return Json("No se puede eliminar un tipo asignado a un Usuario.");
+            }
+        }
 
 
     }

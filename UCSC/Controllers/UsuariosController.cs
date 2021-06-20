@@ -10,7 +10,7 @@ namespace UCSC.Controllers
 {
     public class UsuariosController : Controller
     {
-        private gestion_eppEntities db = new gestion_eppEntities();
+        private gestion_eppEntities1 db = new gestion_eppEntities1();
         // GET: Usuarios
         public ActionResult Index()
         {
@@ -23,7 +23,7 @@ namespace UCSC.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.tipoUsuario = new SelectList(db.TipoUsuario, "id_tipo", "nombre");
+            ViewBag.tipo = new SelectList(db.TipoUsuario, "id_tipo", "nombre");
             return View();
         }
 
@@ -37,8 +37,9 @@ namespace UCSC.Controllers
                 return Json("");
             }
 
-            catch (Exception)
-            {
+            catch (Exception ex)
+                        {
+                Console.WriteLine(ex.ToString());
                 return Json("Ha ocurrido un error, intentelo mas tarde.");
             }
         }
@@ -48,7 +49,7 @@ namespace UCSC.Controllers
 
             var usuario = db.Usuario.Find(id);
 
-            ViewBag.TipoUsuario = new SelectList(db.TipoUsuario, "id_tipo", "nombre", usuario.id_tipo);
+            ViewBag.tipo = new SelectList(db.TipoUsuario, "id_tipo", "nombre", usuario.id_tipo);
             return PartialView("_Edit", usuario);
         }
         [HttpPost]

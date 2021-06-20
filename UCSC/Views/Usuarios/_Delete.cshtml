@@ -24,6 +24,10 @@
 <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
     $('#eliminar').click(function () {
+
+
+
+
         $.ajax({
             type: 'POST',
             url: '@Url.Action("Eliminar")',
@@ -40,7 +44,7 @@
                         closeOnClickOutside: false,
                     }).then(function (isConfirm) {
                         if (isConfirm) {
-                            cargarTabla();
+                            location.reload();
                         }
                     });
 

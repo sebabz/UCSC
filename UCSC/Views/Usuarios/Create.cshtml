@@ -57,10 +57,10 @@
                 </div>
                                
                 <div class="form-group row">
-                    <label class="col-2 text-right">Usuario:</label>
+                    <label class="col-2 text-right">Tipo Usuario:</label>
                     <div class="col-10">
                         <!--Helper de razor para select -->
-                        @Html.DropDownList("tipoUsuario", null, "Seleccione Tipo de Usuario", htmlAttributes: new { @class = "form-control select2" })
+                        @Html.DropDownList("tipo", null, "Seleccione Usuario", htmlAttributes: new { @class = "form-control select2" })
                     </div>
                 </div>
 
@@ -107,8 +107,9 @@
                 rut: $('#rut').val().trim(),
                 email: $('#email').val().trim(),
                 pass: $('#pass').val().trim(),
-                estado: $('#estado').val().trim(),
-                id_tipo: $('#tipoUsuario').val()
+                estado: $('#estado').val(),
+                id_tipo: $('#tipo').val()
+
 
             }
             //se enviarán los datos al controlador a través de ajax
@@ -144,24 +145,7 @@
     });
 
     //verificar si el código existe, blur sirve cuando pierde el foco el input
-    $('#codigo').blur(function () {
-        if ($('#codigo').val().trim() !== '') {
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("CodigoExiste")',
-                data: '{codigo:' + JSON.stringify($('#codigo').val()) + '}',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (ok) {
-                    if (ok !== '') {
-                        swal('El producto existe ' + ok, '', 'warning');
-                        $('#codigo').val('');
-                        $('#codigo').focus();//focus sirve para dejar seleccionado el input
-                    }
-                }
-            });
-        }
-    });
+   
 
     function limpiar() {
 

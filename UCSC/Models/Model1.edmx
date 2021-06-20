@@ -37,12 +37,12 @@
           </Key>
           <Property Name="id_epp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="codigo" Type="varchar" MaxLength="50" />
-          <Property Name="cantidad" Type="int" />
+          <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
           <Property Name="comentario" Type="varchar" MaxLength="200" />
           <Property Name="id_categoria" Type="int" Nullable="false" />
-          <Property Name="id_user" Type="int" />
-          <Property Name="estado" Type="int" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -72,6 +72,16 @@
           <Property Name="comentario" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
             <PropertyRef Name="id_tipo" />
@@ -83,7 +93,7 @@
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
-          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="rut" Type="varchar" MaxLength="13" Nullable="false" />
@@ -93,7 +103,7 @@
           <Property Name="id_tipo" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__EPP__estado__571DF1D5">
-          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="EPP" Type="Self.EPP" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
@@ -189,7 +199,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="EPP" Type="Self.EPP" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -220,6 +230,7 @@
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenEntrada" EntityType="Self.OrdenEntrada" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenSalida" EntityType="Self.OrdenSalida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__EPP__estado__571DF1D5" Association="Self.FK__EPP__estado__571DF1D5">
@@ -304,12 +315,12 @@
           </Key>
           <Property Name="id_epp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cantidad" Type="Int32" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
           <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="id_categoria" Type="Int32" Nullable="false" />
-          <Property Name="id_user" Type="Int32" />
-          <Property Name="estado" Type="Int32" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categoria" Relationship="Self.FK_Producto_Categoria" FromRole="EPP" ToRole="Categoria" />
           <NavigationProperty Name="DetalleEntrada" Relationship="Self.FK_DetalleEntrada_Producto" FromRole="EPP" ToRole="DetalleEntrada" />
           <NavigationProperty Name="Estado1" Relationship="Self.FK__EPP__estado__571DF1D5" FromRole="EPP" ToRole="Estado" />
@@ -349,6 +360,16 @@
           <NavigationProperty Name="Usuario" Relationship="Self.FK_OrdenSalida_Usuario" FromRole="OrdenSalida" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="Self.FK_OrdenSalida_Usuario1" FromRole="OrdenSalida" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
             <PropertyRef Name="id_tipo" />
@@ -361,7 +382,7 @@
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
-          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="rut" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
@@ -424,7 +445,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__EPP__estado__571DF1D5">
-          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="EPP" Type="Self.EPP" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
@@ -436,7 +457,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="EPP" Type="Self.EPP" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -495,7 +516,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="gestion_eppEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="gestion_eppEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
           <EntitySet Name="DetalleEntrada" EntityType="Self.DetalleEntrada" />
           <EntitySet Name="DetalleSalida" EntityType="Self.DetalleSalida" />
@@ -503,6 +524,7 @@
           <EntitySet Name="Estado" EntityType="Self.Estado" />
           <EntitySet Name="OrdenEntrada" EntityType="Self.OrdenEntrada" />
           <EntitySet Name="OrdenSalida" EntityType="Self.OrdenSalida" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <AssociationSet Name="FK_Producto_Categoria" Association="Self.FK_Producto_Categoria">
@@ -551,7 +573,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="gestion_eppModelStoreContainer" CdmEntityContainer="gestion_eppEntities">
+        <EntityContainerMapping StorageEntityContainer="gestion_eppModelStoreContainer" CdmEntityContainer="gestion_eppEntities1">
           <EntitySetMapping Name="Categoria">
             <EntityTypeMapping TypeName="gestion_eppModel.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
@@ -623,6 +645,17 @@
                 <ScalarProperty Name="user_pide" ColumnName="user_pide" />
                 <ScalarProperty Name="comentario" ColumnName="comentario" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="gestion_eppModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

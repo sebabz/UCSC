@@ -10,7 +10,7 @@ namespace UCSC.Controllers
 {
     public class EPPController : Controller
     {
-        private gestion_eppEntities db = new gestion_eppEntities();
+        private gestion_eppEntities1 db = new gestion_eppEntities1();
 
 
         // GET: EPP

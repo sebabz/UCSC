@@ -13,10 +13,10 @@ namespace UCSC.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class gestion_eppEntities : DbContext
+    public partial class gestion_eppEntities1 : DbContext
     {
-        public gestion_eppEntities()
-            : base("name=gestion_eppEntities")
+        public gestion_eppEntities1()
+            : base("name=gestion_eppEntities1")
         {
         }
     
@@ -32,6 +32,7 @@ namespace UCSC.Models
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<OrdenEntrada> OrdenEntrada { get; set; }
         public virtual DbSet<OrdenSalida> OrdenSalida { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }

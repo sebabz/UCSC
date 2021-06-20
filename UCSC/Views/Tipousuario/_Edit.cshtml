@@ -7,20 +7,80 @@
             <h4 class="modal-title">Detalle Tipo de Usuario</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="@Url.Action("Edit","TipoUsuario")" method="post">
+        @*<form action="@Url.Action("Edit","TipoUsuario")" method="post">*@
             <!-- Modal body -->
             <div class="modal-body">
-                <input type="hidden" name="id_tipo" value="@Model.id_tipo" />
+                <input type="hidden" id="id_tipo" name="id_tipo" value="@Model.id_tipo" />
                 <label> Nombre:</label>
-                <input type="text" name="nombre" value="@Model.nombre" class="form-control" />
+                <input type="text" id="nombretipo" name="nombre" value="@Model.nombre" class="form-control" />
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <input type="submit" value="Editar" class="btn btn-primary" />
+                <input type="submit" id="editar" value="Editar" class="btn btn-primary" />
             </div>
-        </form>
+        @*</form>*@
     </div>
 </div>
+
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Scripts/plugins/select2/select2.full.min.js"></script>
+<script>
+ 
+
+    $('#editar').click(function (e) {
+        e.preventDefault();
+        let error = '';
+
+        if ($('#nombretipo').val().trim() === '')
+            error += 'Debe ingresar nombre \n';
+
+        if (error != '') {
+            swal('Error validación', error, 'error');
+        }
+        else
+        {
+            const data = {
+                id_tipo: $('#id_tipo').val(),
+                nombre: $('#nombretipo').val().trim()
+                
+            }
+            //se enviarán los datos al controlador a través de ajax
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit")',
+                data: '{tipoUsuario:' + JSON.stringify(data) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (ok) {
+                    if (ok === '') {
+                        swal({
+                            title: 'Modificación correcta',
+                            text: 'Los datos se han guardado con éxito!',
+                            icon: 'success',
+                            button: 'Cerrar',
+                            closeOnClickOutside: false,
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();//recarga la página
+
+                            }
+                        });
+                    } else {
+                        swal('Error', ok, 'error');
+                    }
+                }
+            });
+        }
+    });
+   
+
+
+   
+</script>
+
+
 

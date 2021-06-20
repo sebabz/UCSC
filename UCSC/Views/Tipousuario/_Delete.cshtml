@@ -7,21 +7,52 @@
             <h4 class="modal-title">Eliminar Tipo de Usuario</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="@Url.Action("Delete","TipoUsuario")" method="post">
+        @*<form action="@Url.Action("Delete","TipoUsuario")" method="post">*@
             <!-- Modal body -->
             <div class="modal-body">
-                <input type="hidden" name="id_tipo" value="@Model.id_tipo" />
+                <input type="hidden" id="id_tipousuario" name="id_tipo" value="@Model.id_tipo" />
                 <h2>¿Desea eliminar la marca @Model.nombre ?</h2>
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <input type="submit" value="Eliminar" class="btn btn-primary" />
+                <input type="button" id="eliminar_tipo" value="Eliminar" class="btn btn-primary" />
             </div>
-        </form>
+        @*</form>*@
     </div>
 </div>
 
+
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+    $('#eliminar_tipo').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Delete")',
+            data: '{id:' + JSON.stringify($('#id_tipousuario').val()) + '}',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (resp) {
+                if (resp == '') {
+                    swal({
+                        title: 'Eliminar Tipo Usuario',
+                        text: 'Se ha eliminado con éxito el registro',
+                        icon: 'success',
+                        button: 'Cerrar',
+                        closeOnClickOutside: false,
+                    }).then(function (isConfirm) {
+                        if (isConfirm) {
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    swal("Eliminar", resp, "error");
+                }
+            }
+        });
+    });
+</script>
 
 
