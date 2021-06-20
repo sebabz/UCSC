@@ -71,14 +71,22 @@ namespace UCSC.Controllers
         public ActionResult Eliminar(int id)
         {
             var usuario = db.Usuario.Find(id);
-            if (usuario != null)
-            {
-                db.Usuario.Remove(usuario);
-                db.SaveChanges();
-                return Json("");
-            }
-            return Json("No se ha podido eliminar el producto");
-        }
 
-    }
+            try
+            {
+
+                if (usuario != null)
+                {
+                    db.Usuario.Remove(usuario);
+                    db.SaveChanges();
+                    return Json("");
+                }
+            }
+            catch (Exception)
+            {
+                return Json("No se ha podido eliminar el Usuario");
+            }
+            return Json("No se puede eliminar un usuario que este asignado");
+        }
+     }
 }

@@ -42,7 +42,7 @@ namespace UCSC.Controllers
         {
             db.Entry(categoria).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json("");
         }
         public ActionResult Delete(int? id)
         {
@@ -57,9 +57,18 @@ namespace UCSC.Controllers
         public ActionResult Delete(int id)
         {
             var categoria = db.Categoria.Find(id);
-            db.Categoria.Remove(categoria);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.Categoria.Remove(categoria);
+                db.SaveChanges();
+                return Json("");
+            }
+            catch(Exception)
+            {
+                return Json("No se puede eliminar una categoria asignada.");
+            }
+           
+           
         }
 
 

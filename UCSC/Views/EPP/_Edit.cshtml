@@ -73,12 +73,21 @@
 <script>
     $('#editar').click(function () {
         let error = '';
-        if (!$('#usuario').val())
-            error += 'Debe seleccionar usuario \n';
+        
         if ($('#nombre').val() === '')
             error += 'Debe ingresar nombre \n';
         if ($('#codigo').val() === '')
             error += 'Debe ingresar código \n';
+        if ($('#cantidad').val() === '')
+            error += 'Debe ingresar cantidad \n';
+        if ($('#categoria').val() === '')
+            error += 'Debe ingresar categoria \n';
+        if ($('#usuario').val() === '')
+            error += 'Debe ingresar usuario \n';
+        if ($('#estado').val().trim() === '')
+            error += 'Debe ingresar estado \n';
+
+
         if (error != '') {
             swal('Error validación', error, 'error');
         }

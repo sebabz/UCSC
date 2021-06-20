@@ -78,7 +78,12 @@
 <link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
 <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="~/Scripts/plugins/select2/select2.full.min.js"></script>
+<script src="~/Scripts/jquery.Rut.js" type="text/javascript"></script>
+
 <script>
+
+    
+
     //expresión relugar para permitir sólo números positivos
     $('.solonumeros').on('input', function () {
         this.value = this.value.replace(/[^0-9]/g, '');
@@ -86,13 +91,38 @@
     //select2
     $('.select2').select2();
 
+    $('#rut').Rut({
+        on_error: function () {
+            alert('Rut incorrecto');
+            $('#rut').val('');
+        },
+        format_on: 'keyup'
+    });
+
     $('#guardar').click(function (e) {
         e.preventDefault();
         let error = '';
 
         if ($('#nombre').val().trim() === '')
             error += 'Debe ingresar nombre \n';
-        
+        if ($('#apellido').val().trim() === '')
+            error += 'Debe ingresar apellido \n';
+        if ($('#rut').val().trim() === '')
+            error += 'Debe ingresar Rut \n';
+
+      
+
+
+        if ($('#email').val().trim() === '')
+            error += 'Debe ingresar un correo \n';
+        if ($('#pass').val().trim() === '')
+            error += 'Debe ingresar contraseña \n';
+        //El estado deberia ser un dropdownlist que muestre el nombre del estado, por ahora lo dejamos solo con el id a mano, porque no hemos creado la tabla
+        if ($('#estado').val() === '')
+            error += 'Debe ingresar estado \n';
+        if ($('#tipo').val() === '')
+            error += 'Debe ingresar tipo de usuario \n';
+
 
 
         if (error != '') {

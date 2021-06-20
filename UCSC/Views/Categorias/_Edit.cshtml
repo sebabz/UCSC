@@ -7,21 +7,79 @@
             <h4 class="modal-title">Detalle Categoría</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="@Url.Action("Edit","Categorias")" method="post">
+        
             <!-- Modal body -->
             <div class="modal-body">
-                <input type="hidden" name="id_categoria" value="@Model.id_categoria" />
+                <input type="hidden" id="id_categoria"name="id_categoria" value="@Model.id_categoria" />
                 <label> Nombre:</label>
-                <input type="text" name="nombre" value="@Model.nombre" class="form-control" />
+                <input type="text" id="nombrecategoria"name="nombre" value="@Model.nombre" class="form-control" />
                 <label>Descripción:</label>
-                <input type="text" name="descripcion" value="@Model.descripcion" class="form-control" />
+                <input type="text"  name="descripcion" value="@Model.descripcion" class="form-control" />
             </div>
 
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                <input type="submit" value="Editar" class="btn btn-primary" />
+                <input type="submit" id="editar" value="Editar" class="btn btn-primary" />
             </div>
-        </form>
+        
     </div>
 </div>
+
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Scripts/plugins/select2/select2.full.min.js"></script>
+<script>
+
+
+    $('#editar').click(function (e) {
+        e.preventDefault();
+        let error = '';
+
+        if ($('#nombrecategoria').val().trim() === '')
+            error += 'Debe ingresar nombre \n';
+
+        if (error != '') {
+            swal('Error validación', error, 'error');
+        }
+        else
+        {
+            const data = {
+                id_tipo: $('#id_categoria').val(),
+                nombre: $('#nombrecategoria').val().trim()
+
+            }
+            //se enviarán los datos al controlador a través de ajax
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit")',
+                data: '{categoria:' + JSON.stringify(data) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (ok) {
+                    if (ok === '') {
+                        swal({
+                            title: 'Modificación correcta',
+                            text: 'Los datos se han guardado con éxito!',
+                            icon: 'success',
+                            button: 'Cerrar',
+                            closeOnClickOutside: false,
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();//recarga la página
+
+                            }
+                        });
+                    } else {
+                        swal('Error', ok, 'error');
+                    }
+                }
+            });
+        }
+    });
+
+
+
+
+</script>
