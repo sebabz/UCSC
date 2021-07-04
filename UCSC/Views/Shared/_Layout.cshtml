@@ -4,12 +4,109 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/Scripts/app/inspinia.js"></script>
+    <script src="~/Scripts/plugins/pace/pace.min.js"></script>
+
 </head>
 <body>
-    <div> 
-        @RenderBody()
-    </div>
+    <div id="wrapper">
+        <!--MENU-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="profile-element">
+                            <a href="#">
+                                <span class="block m-t-xs font-bold">Usuario</span>
+                                <span class="text-muted text-xs block">Administrador </span>
+                            </a>
+                        </div>
+                        <div class="logo-element">
+                            SI
+                        </div>
+                    </li>
+                    <!--Agregar links al menú -->
+                    @*<li>
+            <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Marcas</span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                <li><a href="@Url.Action("Create", "Marcas")">Crear Marca</a></li>
+                <li><a href="@Url.Action("Index", "Marcas")">Lista Marcas</a></li>
+            </ul>
+        </li>*@
+                    <li>
+                        <a href="#"><i class="fa fa-amazon"></i><span class="nav-label">Categorías</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("Create", "Categorias")">Crear Categoría</a></li>
+                            <li><a href="@Url.Action("Index", "Categorias")">Lista Categorías</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-ambulance"></i><span class="nav-label"> EPP </span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("Create", "EPP")">Crear EPP</a></li>
+                            <li><a href="@Url.Action("Index","EPP")">Lista EPP</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-address-book"></i><span class="nav-label">Usuario</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("Create", "Usuarios")">Crear Usuario</a></li>
+                            <li><a href="@Url.Action("Index","Usuarios")">Listar Usuarios</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-users"></i><span class="nav-label">Tipos de Usuario</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("Create", "TipoUsuario")">Crear Tipo de Usuario</a></li>
+                            <li><a href="@Url.Action("Index","TipoUsuario")">Listar Tipos de Usuarios</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-etsy"></i><span class="nav-label">Estados</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("Create", "Estado")">Crear Estado</a></li>
+                            <li><a href="@Url.Action("Index","Estado")">Listar Estados</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--FIN MENU-->
 
-    <footer>    </footer>
+        <div id="page-wrapper" class="gray-bg">
+            <!--TOP NAVBAR-->
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li style="padding:20px">
+                            <h3><strong>Sistema de Gestión y Seguimiento de EPP </strong></h3>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-sign-out"></i> Desconectarse
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!--FIN TOP NAVBAR-->
+            @RenderBody()
+        </div>
+    </div>
 </body>
 </html>
+

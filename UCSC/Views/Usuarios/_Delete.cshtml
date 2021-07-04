@@ -1,0 +1,55 @@
+﻿@model UCSC.Models.Usuario
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Eliminar Usuario</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <input type="hidden" id="id" value="@Model.id_usuario" />
+            <h2>¿Desea eliminar el producto: <b>@Model.nombre</b> ?</h2>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <input type="button" id="eliminar" value="Eliminar" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+    $('#eliminar').click(function () {
+
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Eliminar")',
+            data: '{id:' + JSON.stringify($('#id').val()) + '}',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (resp) {
+                if (resp == '') {
+                    swal({
+                        title: 'Eliminar Usuario',
+                        text: 'Se ha eliminado con éxito el registro',
+                        icon: 'success',
+                        button: 'Cerrar',
+                        closeOnClickOutside: false,
+                    }).then(function (isConfirm) {
+                        if (isConfirm) {
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    swal("Eliminar", resp, "error");
+                }
+            }
+        });
+    });
+</script>

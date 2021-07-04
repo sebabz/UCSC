@@ -1,0 +1,155 @@
+﻿@model UCSC.Models.Usuario
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Detalle Usuario</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <input type="hidden" id="id_usuario" value="@Model.id_usuario" />
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Nombre:</label>
+                <div class="col-10">
+                    <input type="text" name="nombre" id="nombre" value="@Model.nombre" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Apellido:</label>
+                <div class="col-10">
+                    <input type="text" name="apellido" id="apellido" value="@Model.apellido" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Rut:</label>
+                <div class="col-10">
+                    <input type="text" name="rut" id="rut" value="@Model.rut" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 text-right">E-Mail:</label>
+                <div class="col-10">
+                    <input type="email" name="email" id="email" value="@Model.email" class="form-control" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Contraseña:</label>
+                <div class="col-10">
+                    <input type="password" name="pass" id="pass" value="@Model.pass" class="form-control" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Estado:</label>
+                <div class="col-10">
+                    <input type="text" name="estado" id="estado" value="@Model.estado" class="form-control" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Tipo Usuario:</label>
+                <div class="col-10">
+                    @Html.DropDownList("tipo", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <input type="button" value="Editar" class="btn btn-primary" id="editar" />
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery.Rut.js" type="text/javascript"></script>
+<script>
+
+    $('#rut').Rut({
+        on_error: function () {
+            alert('Rut incorrecto');
+            $('#rut').val('') ;
+        },
+        format_on: 'keyup'
+        
+    });
+
+    $('#editar').click(function () {
+        let error = '';
+
+        if ($('#nombre').val().trim() === '')
+            error += 'Debe ingresar nombre \n';
+        if ($('#apellido').val().trim() === '')
+            error += 'Debe ingresar apellido \n';
+        if ($('#rut').val().trim() === '')
+            error += 'Debe ingresar Rut \n';
+
+
+        if ($('#email').val().trim() === '')
+            error += 'Debe ingresar un correo \n';
+        if ($('#pass').val().trim() === '')
+            error += 'Debe ingresar contraseña \n';
+        //El estado deberia ser un dropdownlist que muestre el nombre del estado, por ahora lo dejamos solo con el id a mano, porque no hemos creado la tabla
+        if ($('#estado').val() === '')
+            error += 'Debe ingresar estado \n';
+        if ($('#tipo').val() === '')
+            error += 'Debe ingresar tipo de usuario \n';
+
+        if (error != '') {
+            swal('Error validación', error, 'error');
+        }
+        else
+        {
+            const usuario = {
+
+                id_usuario: $('#id_usuario').val(),
+                nombre: $('#nombre').val().trim(),
+                apellido: $('#apellido').val().trim(),
+                rut: $('#rut').val().trim(),
+                email: $('#email').val().trim(),
+                pass: $('#pass').val().trim(),
+                estado: $('#estado').val().trim(),
+                id_tipo: $('#tipo').val()
+
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit")',
+                data: '{usuario:' + JSON.stringify(usuario) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (resp) {
+                    if (resp == "") {
+                        $('#modalEdit').modal('hide');
+                        swal({
+                            title: 'Modificar Usuario',
+                            text: 'Los datos se han guardado con éxito!',
+                            icon: 'success',
+                            button: 'Cerrar',
+
+                            closeOnClickOutside: false,
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+
+</script>
