@@ -20,12 +20,6 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-2 text-right">Código:</label>
-                    <div class="col-10">
-                        <input type="text" name="codigo" id="codigo" class="form-control form-control-sm" />
-                    </div>
-                </div>
 
                 <div class="form-group row">
                     <label class="col-2 text-right">Categoría:</label>
@@ -93,9 +87,7 @@
 
         if ($('#nombre').val().trim() === '')
             error += 'Debe ingresar nombre \n';
-        if ($('#codigo').val().trim() === '')
-            error += 'Debe ingresar código \n';
-
+        
         if ($('#cantidad').val() === '')
             error += 'Debe ingresar cantidad \n';
         if ($('#categoria').val() === '')
@@ -113,7 +105,7 @@
             const data = {
 
                 nombre: $('#nombre').val().trim(),
-                codigo: $('#codigo').val().trim(),
+                
                 cantidad: $('#cantidad').val(),
                 comentario: $('#comentario').val().trim(),
                 id_categoria: $('#categoria').val(),
@@ -176,7 +168,7 @@
 
     function limpiar() {
         $('#nombre').val('');
-        $('#codigo').val('');
+        
         $('#cantidad').val('');
         $('#comentario').val('');
         $('#usuario').val(0);

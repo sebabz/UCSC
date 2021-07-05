@@ -22,9 +22,8 @@ namespace UCSC.Models
     
         public int id_orden { get; set; }
         public System.DateTime fecha { get; set; }
-        public int id_user { get; set; }
+        public int id_usuario { get; set; }
         public string comentario { get; set; }
-        public int num_factura { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleEntrada> DetalleEntrada { get; set; }

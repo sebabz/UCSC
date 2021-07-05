@@ -15,7 +15,7 @@ namespace UCSC.Models
     public partial class DetalleSalida
     {
         public int id_detalle { get; set; }
-        public int id_stock { get; set; }
+        public int id_epp { get; set; }
         public int cantidad { get; set; }
         public int id_orden { get; set; }
     

@@ -28,12 +28,11 @@ namespace UCSC.Models
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<DetalleEntrada> DetalleEntrada { get; set; }
         public virtual DbSet<DetalleSalida> DetalleSalida { get; set; }
-        public virtual DbSet<EPP> EPP { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<OrdenEntrada> OrdenEntrada { get; set; }
         public virtual DbSet<OrdenSalida> OrdenSalida { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<EPP> EPP { get; set; }
     }
 }
