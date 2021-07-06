@@ -18,6 +18,8 @@ namespace UCSC.Models
         public Estado()
         {
             this.EPP = new HashSet<EPP>();
+            this.OrdenSalida = new HashSet<OrdenSalida>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
         public int id_estado { get; set; }
@@ -25,5 +27,9 @@ namespace UCSC.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EPP> EPP { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdenSalida> OrdenSalida { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

@@ -47,7 +47,7 @@
           <Key>
             <PropertyRef Name="id_estado" />
           </Key>
-          <Property Name="id_estado" Type="int" Nullable="false" />
+          <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrdenEntrada">
@@ -150,6 +150,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrdenSalida_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="OrdenSalida" Type="Self.OrdenSalida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="OrdenSalida">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrdenSalida_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="OrdenSalida" Type="Self.OrdenSalida" Multiplicity="*" />
@@ -198,6 +210,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Usuario_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuario_TipoUsuario">
           <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -240,6 +264,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="OrdenEntrada" EntitySet="OrdenEntrada" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrdenSalida_Estado" Association="Self.FK_OrdenSalida_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="OrdenSalida" EntitySet="OrdenSalida" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrdenSalida_Usuario" Association="Self.FK_OrdenSalida_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="OrdenSalida" EntitySet="OrdenSalida" />
@@ -256,6 +284,10 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="EPP" EntitySet="EPP" />
           </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -269,11 +301,9 @@
           <EntitySet Name="Categoria" EntityType="gestion_eppModel.Categoria" />
           <EntitySet Name="DetalleEntrada" EntityType="gestion_eppModel.DetalleEntrada" />
           <EntitySet Name="DetalleSalida" EntityType="gestion_eppModel.DetalleSalida" />
-          <EntitySet Name="Estado" EntityType="gestion_eppModel.Estado" />
           <EntitySet Name="OrdenEntrada" EntityType="gestion_eppModel.OrdenEntrada" />
           <EntitySet Name="OrdenSalida" EntityType="gestion_eppModel.OrdenSalida" />
           <EntitySet Name="TipoUsuario" EntityType="gestion_eppModel.TipoUsuario" />
-          <EntitySet Name="Usuario" EntityType="gestion_eppModel.Usuario" />
           <AssociationSet Name="FK_DetalleEntrada_OrdenEntrada" Association="gestion_eppModel.FK_DetalleEntrada_OrdenEntrada">
             <End Role="OrdenEntrada" EntitySet="OrdenEntrada" />
             <End Role="DetalleEntrada" EntitySet="DetalleEntrada" />
@@ -281,6 +311,33 @@
           <AssociationSet Name="FK_DatalleSalida_OrdenSalida" Association="gestion_eppModel.FK_DatalleSalida_OrdenSalida">
             <End Role="OrdenSalida" EntitySet="OrdenSalida" />
             <End Role="DetalleSalida" EntitySet="DetalleSalida" />
+          </AssociationSet>
+          <EntitySet Name="EPP" EntityType="gestion_eppModel.EPP" />
+          <AssociationSet Name="FK_Producto_Categoria" Association="gestion_eppModel.FK_Producto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="EPP" EntitySet="EPP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEntrada_Producto" Association="gestion_eppModel.FK_DetalleEntrada_Producto">
+            <End Role="EPP" EntitySet="EPP" />
+            <End Role="DetalleEntrada" EntitySet="DetalleEntrada" />
+          </AssociationSet>
+          <EntitySet Name="Estado" EntityType="gestion_eppModel.Estado" />
+          <AssociationSet Name="FK__EPP__estado__571DF1D5" Association="gestion_eppModel.FK__EPP__estado__571DF1D5">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="EPP" EntitySet="EPP" />
+          </AssociationSet>
+          <EntitySet Name="Usuario" EntityType="gestion_eppModel.Usuario" />
+          <AssociationSet Name="FK_Producto_Usuario" Association="gestion_eppModel.FK_Producto_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="EPP" EntitySet="EPP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenSalida_Estado" Association="gestion_eppModel.FK_OrdenSalida_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="OrdenSalida" EntitySet="OrdenSalida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Estado" Association="gestion_eppModel.FK_Usuario_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenEntrada_Usuario" Association="gestion_eppModel.FK_OrdenEntrada_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -297,23 +354,6 @@
           <AssociationSet Name="FK_Usuario_TipoUsuario" Association="gestion_eppModel.FK_Usuario_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <EntitySet Name="EPP" EntityType="gestion_eppModel.EPP" />
-          <AssociationSet Name="FK_Producto_Categoria" Association="gestion_eppModel.FK_Producto_Categoria">
-            <End Role="Categoria" EntitySet="Categoria" />
-            <End Role="EPP" EntitySet="EPP" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleEntrada_Producto" Association="gestion_eppModel.FK_DetalleEntrada_Producto">
-            <End Role="EPP" EntitySet="EPP" />
-            <End Role="DetalleEntrada" EntitySet="DetalleEntrada" />
-          </AssociationSet>
-          <AssociationSet Name="FK__EPP__estado__571DF1D5" Association="gestion_eppModel.FK__EPP__estado__571DF1D5">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="EPP" EntitySet="EPP" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Producto_Usuario" Association="gestion_eppModel.FK_Producto_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="EPP" EntitySet="EPP" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Categoria">
@@ -346,14 +386,6 @@
           <Property Name="id_orden" Type="Int32" Nullable="false" />
           <NavigationProperty Name="OrdenSalida" Relationship="gestion_eppModel.FK_DatalleSalida_OrdenSalida" FromRole="DetalleSalida" ToRole="OrdenSalida" />
         </EntityType>
-        <EntityType Name="Estado">
-          <Key>
-            <PropertyRef Name="id_estado" />
-          </Key>
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="EPP" Relationship="gestion_eppModel.FK__EPP__estado__571DF1D5" FromRole="Estado" ToRole="EPP" />
-        </EntityType>
         <EntityType Name="OrdenEntrada">
           <Key>
             <PropertyRef Name="id_orden" />
@@ -376,9 +408,10 @@
           <Property Name="comentario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DetalleSalida" Relationship="gestion_eppModel.FK_DatalleSalida_OrdenSalida" FromRole="OrdenSalida" ToRole="DetalleSalida" />
+          <NavigationProperty Name="Estado" Relationship="gestion_eppModel.FK_OrdenSalida_Estado" FromRole="OrdenSalida" ToRole="Estado" />
           <NavigationProperty Name="Usuario" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario" FromRole="OrdenSalida" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario1" FromRole="OrdenSalida" ToRole="Usuario" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
             <PropertyRef Name="id_tipo" />
@@ -386,24 +419,6 @@
           <Property Name="id_tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="gestion_eppModel.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="id_usuario" />
-          </Key>
-          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rut" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <Property Name="id_tipo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrdenEntrada" Relationship="gestion_eppModel.FK_OrdenEntrada_Usuario" FromRole="Usuario" ToRole="OrdenEntrada" />
-          <NavigationProperty Name="OrdenSalida" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario" FromRole="Usuario" ToRole="OrdenSalida" />
-          <NavigationProperty Name="OrdenSalida1" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario1" FromRole="Usuario" ToRole="OrdenSalida" />
-          <NavigationProperty Name="TipoUsuario" Relationship="gestion_eppModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
-          <NavigationProperty Name="EPP" Relationship="gestion_eppModel.FK_Producto_Usuario" FromRole="Usuario" ToRole="EPP" />
         </EntityType>
         <Association Name="FK_DetalleEntrada_OrdenEntrada">
           <End Type="gestion_eppModel.OrdenEntrada" Role="OrdenEntrada" Multiplicity="1" />
@@ -426,6 +441,123 @@
             </Principal>
             <Dependent Role="DetalleSalida">
               <PropertyRef Name="id_orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EPP">
+          <Key>
+            <PropertyRef Name="id_epp" />
+          </Key>
+          <Property Name="id_epp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="id_categoria" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="gestion_eppModel.FK_Producto_Categoria" FromRole="EPP" ToRole="Categoria" />
+          <NavigationProperty Name="DetalleEntrada" Relationship="gestion_eppModel.FK_DetalleEntrada_Producto" FromRole="EPP" ToRole="DetalleEntrada" />
+          <NavigationProperty Name="Estado" Relationship="gestion_eppModel.FK__EPP__estado__571DF1D5" FromRole="EPP" ToRole="Estado" />
+          <NavigationProperty Name="Usuario" Relationship="gestion_eppModel.FK_Producto_Usuario" FromRole="EPP" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Producto_Categoria">
+          <End Type="gestion_eppModel.Categoria" Role="Categoria" Multiplicity="1" />
+          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="EPP">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleEntrada_Producto">
+          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="1" />
+          <End Type="gestion_eppModel.DetalleEntrada" Role="DetalleEntrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPP">
+              <PropertyRef Name="id_epp" />
+            </Principal>
+            <Dependent Role="DetalleEntrada">
+              <PropertyRef Name="id_epp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EPP" Relationship="gestion_eppModel.FK__EPP__estado__571DF1D5" FromRole="Estado" ToRole="EPP" />
+          <NavigationProperty Name="OrdenSalida" Relationship="gestion_eppModel.FK_OrdenSalida_Estado" FromRole="Estado" ToRole="OrdenSalida" />
+          <NavigationProperty Name="Usuario" Relationship="gestion_eppModel.FK_Usuario_Estado" FromRole="Estado" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__EPP__estado__571DF1D5">
+          <End Type="gestion_eppModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="EPP">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rut" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EPP" Relationship="gestion_eppModel.FK_Producto_Usuario" FromRole="Usuario" ToRole="EPP" />
+          <NavigationProperty Name="Estado" Relationship="gestion_eppModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
+          <NavigationProperty Name="OrdenEntrada" Relationship="gestion_eppModel.FK_OrdenEntrada_Usuario" FromRole="Usuario" ToRole="OrdenEntrada" />
+          <NavigationProperty Name="OrdenSalida" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario" FromRole="Usuario" ToRole="OrdenSalida" />
+          <NavigationProperty Name="OrdenSalida1" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario1" FromRole="Usuario" ToRole="OrdenSalida" />
+          <NavigationProperty Name="TipoUsuario" Relationship="gestion_eppModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+        </EntityType>
+        <Association Name="FK_Producto_Usuario">
+          <End Type="gestion_eppModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="EPP">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenSalida_Estado">
+          <End Type="gestion_eppModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="gestion_eppModel.OrdenSalida" Role="OrdenSalida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="OrdenSalida">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Estado">
+          <End Type="gestion_eppModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="gestion_eppModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="id_estado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -477,70 +609,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="EPP">
-          <Key>
-            <PropertyRef Name="id_epp" />
-          </Key>
-          <Property Name="id_epp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="id_categoria" Type="Int32" Nullable="false" />
-          <Property Name="id_usuario" Type="Int32" Nullable="false" />
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Categoria" Relationship="gestion_eppModel.FK_Producto_Categoria" FromRole="EPP" ToRole="Categoria" />
-          <NavigationProperty Name="DetalleEntrada" Relationship="gestion_eppModel.FK_DetalleEntrada_Producto" FromRole="EPP" ToRole="DetalleEntrada" />
-          <NavigationProperty Name="Estado" Relationship="gestion_eppModel.FK__EPP__estado__571DF1D5" FromRole="EPP" ToRole="Estado" />
-          <NavigationProperty Name="Usuario" Relationship="gestion_eppModel.FK_Producto_Usuario" FromRole="EPP" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Producto_Categoria">
-          <End Type="gestion_eppModel.Categoria" Role="Categoria" Multiplicity="1" />
-          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categoria">
-              <PropertyRef Name="id_categoria" />
-            </Principal>
-            <Dependent Role="EPP">
-              <PropertyRef Name="id_categoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleEntrada_Producto">
-          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="1" />
-          <End Type="gestion_eppModel.DetalleEntrada" Role="DetalleEntrada" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EPP">
-              <PropertyRef Name="id_epp" />
-            </Principal>
-            <Dependent Role="DetalleEntrada">
-              <PropertyRef Name="id_epp" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__EPP__estado__571DF1D5">
-          <End Type="gestion_eppModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="EPP">
-              <PropertyRef Name="id_estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Producto_Usuario">
-          <End Type="gestion_eppModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="EPP">
-              <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -576,14 +644,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Estado">
-            <EntityTypeMapping TypeName="gestion_eppModel.Estado">
-              <MappingFragment StoreEntitySet="Estado">
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrdenEntrada">
             <EntityTypeMapping TypeName="gestion_eppModel.OrdenEntrada">
               <MappingFragment StoreEntitySet="OrdenEntrada">
@@ -614,6 +674,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EPP">
+            <EntityTypeMapping TypeName="gestion_eppModel.EPP">
+              <MappingFragment StoreEntitySet="EPP">
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_epp" ColumnName="id_epp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="gestion_eppModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="gestion_eppModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
@@ -625,19 +706,6 @@
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EPP">
-            <EntityTypeMapping TypeName="gestion_eppModel.EPP">
-              <MappingFragment StoreEntitySet="EPP">
-                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
-                <ScalarProperty Name="comentario" ColumnName="comentario" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_epp" ColumnName="id_epp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,7 +14,27 @@
                 <h3>Ingrese los datos de la categoría a crear</h3>
             </div>
             <div class="ibox-content">
+
+                <div class="form-group row">
+                    <label class="col-sm-1">Nombre</label>
+                    
+                    @Html.DropDownList("epp", null, "Seleccione epp", htmlAttributes: new { @class = "form-control select2" })
+
+                </div>
+
+
             </div>
         </div>
     </div>
 </div>
+
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Scripts/plugins/select2/select2.full.min.js"></script>
+
+
+<script>
+    //select2
+    $('.select2').select2();
+</script>

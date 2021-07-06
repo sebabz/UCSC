@@ -35,25 +35,7 @@
                         @Html.DropDownList("usuario", null, "Seleccione Usuario", htmlAttributes: new { @class = "form-control select2" })
                     </div>
                 </div>
-
-
-
-                <div class="form-group row">
-                    <label class="col-2 text-right">Cantidad:</label>
-                    <div class="col-10">
-                        <input type="number" name="cantidad" id="cantidad" class="form-control form-control-sm solonumeros" />
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-2 text-right">Estado:</label>
-                    <div class="col-10">
-                        <input type="text" name="estado" id="estado" class="form-control form-control-sm" />
-                    </div>
-                </div>
-
-
-
+                                                
                 <div class="form-group row">
                     <label class="col-2 text-right">Comentario:</label>
                     <div class="col-10">
@@ -87,16 +69,12 @@
 
         if ($('#nombre').val().trim() === '')
             error += 'Debe ingresar nombre \n';
-        
-        if ($('#cantidad').val() === '')
-            error += 'Debe ingresar cantidad \n';
+                
         if ($('#categoria').val() === '')
             error += 'Debe ingresar categoria \n';
         if ($('#usuario').val() === '')
             error += 'Debe ingresar usuario \n';
-        if ($('#estado').val().trim() === '')
-            error += 'Debe ingresar estado \n';
-
+        
         if (error != '') {
             swal('Error validación', error, 'error');
         }
@@ -105,12 +83,11 @@
             const data = {
 
                 nombre: $('#nombre').val().trim(),
-                
-                cantidad: $('#cantidad').val(),
+                cantidad: "0",
                 comentario: $('#comentario').val().trim(),
                 id_categoria: $('#categoria').val(),
-                id_user: $('#usuario').val(),
-                estado: $('#estado').val().trim()
+                id_usuario: $('#usuario').val(),
+                id_estado: "5"
 
 
             }

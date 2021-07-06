@@ -17,10 +17,10 @@ namespace UCSC.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.EPP = new HashSet<EPP>();
             this.OrdenEntrada = new HashSet<OrdenEntrada>();
             this.OrdenSalida = new HashSet<OrdenSalida>();
             this.OrdenSalida1 = new HashSet<OrdenSalida>();
-            this.EPP = new HashSet<EPP>();
         }
     
         public int id_usuario { get; set; }
@@ -33,13 +33,14 @@ namespace UCSC.Models
         public int id_tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EPP> EPP { get; set; }
+        public virtual Estado Estado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenEntrada> OrdenEntrada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenSalida> OrdenSalida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenSalida> OrdenSalida1 { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EPP> EPP { get; set; }
     }
 }

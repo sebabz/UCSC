@@ -30,11 +30,11 @@
                                 <td>@item.nombre</td>
                                 <td>
                                     <button class="btn btn-warning" data-toggle="modal"
-                                            data-url="@Url.Action("Edit","Estado",new { id = item.id })">
+                                            data-url="@Url.Action("Edit","Estado",new { id = item.id_estado })">
                                         <i class="fa fa-edit"></i> Editar
                                     </button>
                                     <button class="btn btn-danger" data-toggle="modal"
-                                            data-url="@Url.Action("Delete","Estado", new { id = item.id })">
+                                            data-url="@Url.Action("Delete","Estado", new { id = item.id_estado })">
                                         <i class="fa fa-trash"></i> Eliminar
                                     </button>
                                 </td>

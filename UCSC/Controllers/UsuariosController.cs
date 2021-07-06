@@ -50,6 +50,7 @@ namespace UCSC.Controllers
             var usuario = db.Usuario.Find(id);
 
             ViewBag.tipo = new SelectList(db.TipoUsuario, "id_tipo", "nombre", usuario.id_tipo);
+            ViewBag.estado = new SelectList(db.Estado, "id_estado", "nombre", usuario.id_estado);
             return PartialView("_Edit", usuario);
         }
         [HttpPost]

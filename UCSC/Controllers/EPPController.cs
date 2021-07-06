@@ -52,7 +52,8 @@ namespace UCSC.Controllers
             var epp = db.EPP.Find(id);
             
             ViewBag.Usuario = new SelectList(db.Usuario, "id_usuario", "nombre", epp.id_usuario);
-            ViewBag.Categoria = new SelectList(db.Categoria, "id_categoria", "nombre", epp.id_usuario);
+            ViewBag.Categoria = new SelectList(db.Categoria, "id_categoria", "nombre", epp.id_categoria);
+            ViewBag.estado = new SelectList(db.Estado, "id_estado", "nombre", epp.id_estado);
             return PartialView("_Edit", epp);
         }
         [HttpPost]

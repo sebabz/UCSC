@@ -10,7 +10,7 @@
         @*<form action="@Url.Action("Edit","TipoUsuario")" method="post">*@
         <!-- Modal body -->
         <div class="modal-body">
-            <input type="hidden" id="id_estado" name="id_estado" value="@Model.id" />
+            <input type="hidden" id="id_estado" name="id_estado" value="@Model.id_estado" />
             <label> Nombre:</label>
             <input type="text" id="nombreestado" name="nombre" value="@Model.nombre" class="form-control" />
         </div>
@@ -44,7 +44,7 @@
         else
         {
             const data = {
-                id: $('#id_estado').val(),
+                id_estado: $('#id_estado').val(),
                 nombre: $('#nombreestado').val().trim()
 
             }

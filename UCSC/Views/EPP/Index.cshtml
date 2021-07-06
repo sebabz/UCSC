@@ -20,7 +20,6 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Codigo</th>
                             <th>Cantidad</th>
                             <th>Comentario</th>
                             <th>Categoria</th>
@@ -35,12 +34,11 @@
                         {
                             <tr>
                                 <td>@item.nombre</td>
-                                <td>@item.codigo</td>
                                 <td>@item.cantidad</td>
                                 <td>@item.comentario</td>
                                 <td>@item.Categoria.nombre</td>
                                 <td>@item.Usuario.nombre</td>
-                                <td>@item.estado</td>
+                                <td>@item.Estado.nombre</td>
                                 <td>
                                     <button class="btn btn-warning" data-toggle="modal"
                                             data-url="@Url.Action("Edit","EPP",new { id = item.id_epp })">

@@ -48,14 +48,8 @@
                         <input type="password" name="pass" id="pass" class="form-control form-control-sm" />
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <label class="col-2 text-right">Estado:</label>
-                    <div class="col-10">
-                        <input type="text" name="estado" id="estado" class="form-control form-control-sm" />
-                    </div>
-                </div>
-                               
+                                
+                                              
                 <div class="form-group row">
                     <label class="col-2 text-right">Tipo Usuario:</label>
                     <div class="col-10">
@@ -117,9 +111,7 @@
             error += 'Debe ingresar un correo \n';
         if ($('#pass').val().trim() === '')
             error += 'Debe ingresar contraseña \n';
-        //El estado deberia ser un dropdownlist que muestre el nombre del estado, por ahora lo dejamos solo con el id a mano, porque no hemos creado la tabla
-        if ($('#estado').val() === '')
-            error += 'Debe ingresar estado \n';
+        
         if ($('#tipo').val() === '')
             error += 'Debe ingresar tipo de usuario \n';
 
@@ -137,7 +129,7 @@
                 rut: $('#rut').val().trim(),
                 email: $('#email').val().trim(),
                 pass: $('#pass').val().trim(),
-                estado: $('#estado').val(),
+                id_estado: "3",
                 id_tipo: $('#tipo').val()
 
 
@@ -184,7 +176,6 @@
         $('#rut').val('');
         $('#email').val('');
         $('#pass').val('');
-        $('#estado').val('');
         $('#id_tipo').val('');
 
     }
