@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\sebas\Downloads\UCSC_MALO EL AGREGAR\UCSC_2\UCSC\Models\Model1.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'D:\ProyectoUCSC\UCSC_2\UCSC\Models\Model1.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

@@ -5,20 +5,20 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="487729a7507a454eac6d1a162dd17a50" Name="Diagram1" ZoomLevel="86">
-        <EntityTypeShape EntityType="gestion_eppModel.Categoria" Width="1.5" PointX="10.375" PointY="7.125" />
-        <EntityTypeShape EntityType="gestion_eppModel.DetalleEntrada" Width="1.5" PointX="7.25" PointY="0.625" />
-        <EntityTypeShape EntityType="gestion_eppModel.DetalleSalida" Width="1.5" PointX="7.25" PointY="3.75" />
-        <EntityTypeShape EntityType="gestion_eppModel.OrdenEntrada" Width="1.5" PointX="5" PointY="0.5" />
-        <EntityTypeShape EntityType="gestion_eppModel.OrdenSalida" Width="1.5" PointX="5" PointY="3.375" />
-        <EntityTypeShape EntityType="gestion_eppModel.TipoUsuario" Width="1.5" PointX="0.5" PointY="2.5" />
-        <AssociationConnector Association="gestion_eppModel.FK_DetalleEntrada_OrdenEntrada" />
-        <AssociationConnector Association="gestion_eppModel.FK_DatalleSalida_OrdenSalida" />
-        <EntityTypeShape EntityType="gestion_eppModel.EPP" Width="1.5" PointX="10.5" PointY="2.5" />
+        <EntityTypeShape EntityType="gestion_eppModel.Categoria" Width="1.5" PointX="11.375" PointY="1.875" />
+        <EntityTypeShape EntityType="gestion_eppModel.DetalleEntrada" Width="1.5" PointX="13.75" PointY="7.75" />
+        <EntityTypeShape EntityType="gestion_eppModel.DetalleSalida" Width="1.5" PointX="10.75" PointY="10" />
+        <EntityTypeShape EntityType="gestion_eppModel.EPP" Width="1.5" PointX="11.5" PointY="5.5" />
+        <EntityTypeShape EntityType="gestion_eppModel.Estado" Width="1.5" PointX="4" PointY="6" />
+        <EntityTypeShape EntityType="gestion_eppModel.OrdenEntrada" Width="1.5" PointX="8.5" PointY="9.875" />
+        <EntityTypeShape EntityType="gestion_eppModel.OrdenSalida" Width="1.5" PointX="8.5" PointY="4.875" />
+        <EntityTypeShape EntityType="gestion_eppModel.TipoUsuario" Width="1.5" PointX="6.375" PointY="2.375" />
+        <EntityTypeShape EntityType="gestion_eppModel.Usuario" Width="1.5" PointX="6.25" PointY="5.125" />
         <AssociationConnector Association="gestion_eppModel.FK_Producto_Categoria" />
+        <AssociationConnector Association="gestion_eppModel.FK_DetalleEntrada_OrdenEntrada" />
         <AssociationConnector Association="gestion_eppModel.FK_DetalleEntrada_Producto" />
-        <EntityTypeShape EntityType="gestion_eppModel.Estado" Width="1.5" PointX="14.875" PointY="3.75" />
+        <AssociationConnector Association="gestion_eppModel.FK_DatalleSalida_OrdenSalida" />
         <AssociationConnector Association="gestion_eppModel.FK__EPP__estado__571DF1D5" />
-        <EntityTypeShape EntityType="gestion_eppModel.Usuario" Width="1.5" PointX="3" PointY="2.125" />
         <AssociationConnector Association="gestion_eppModel.FK_Producto_Usuario" />
         <AssociationConnector Association="gestion_eppModel.FK_OrdenSalida_Estado" />
         <AssociationConnector Association="gestion_eppModel.FK_Usuario_Estado" />
@@ -26,6 +26,8 @@
         <AssociationConnector Association="gestion_eppModel.FK_OrdenSalida_Usuario" />
         <AssociationConnector Association="gestion_eppModel.FK_OrdenSalida_Usuario1" />
         <AssociationConnector Association="gestion_eppModel.FK_Usuario_TipoUsuario" />
+        <EntityTypeShape EntityType="gestion_eppModel.Carrera" Width="1.5" PointX="8.625" PointY="2.25" />
+        <AssociationConnector Association="gestion_eppModel.FK_OrdenSalida_Carrera" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

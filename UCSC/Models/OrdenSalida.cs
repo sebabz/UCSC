@@ -24,6 +24,12 @@ namespace UCSC.Models
         public System.DateTime fecha_orden { get; set; }
         public Nullable<int> user_entrega { get; set; }
         public int user_pide { get; set; }
+        public string ubicacion { get; set; }
+        public int id_carrera { get; set; }
+        public string periodo_uso { get; set; }
+        public Nullable<int> cant_alumnos { get; set; }
+        public System.DateTime fecha_requerida { get; set; }
+        public Nullable<int> cant_docentes { get; set; }
         public string comentario { get; set; }
         public int id_estado { get; set; }
     
@@ -32,5 +38,6 @@ namespace UCSC.Models
         public virtual Estado Estado { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Usuario Usuario1 { get; set; }
+        public virtual Carrera Carrera { get; set; }
     }
 }

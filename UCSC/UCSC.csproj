@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CarrerasController.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\EPPController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
@@ -171,6 +172,9 @@
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Carrera.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -289,6 +293,10 @@
     <Content Include="Views\Estado\_Edit.cshtml" />
     <Content Include="Views\Estado\_Delete.cshtml" />
     <Content Include="Views\OrdenEntradas\OrdenEntrada.cshtml" />
+    <Content Include="Views\Carreras\Index.cshtml" />
+    <Content Include="Views\Carreras\Create.cshtml" />
+    <Content Include="Views\Carreras\_Edit.cshtml" />
+    <Content Include="Views\Carreras\_Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
