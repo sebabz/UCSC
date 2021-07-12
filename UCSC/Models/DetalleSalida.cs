@@ -20,5 +20,6 @@ namespace UCSC.Models
         public int id_orden { get; set; }
     
         public virtual OrdenSalida OrdenSalida { get; set; }
+        public virtual EPP EPP { get; set; }
     }
 }

@@ -12,6 +12,13 @@ namespace UCSC.Controllers
     {
         private gestion_eppEntities1 db = new gestion_eppEntities1();
         // GET: Usuarios
+
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
 

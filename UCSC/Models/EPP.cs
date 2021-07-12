@@ -18,6 +18,7 @@ namespace UCSC.Models
         public EPP()
         {
             this.DetalleEntrada = new HashSet<DetalleEntrada>();
+            this.DetalleSalida = new HashSet<DetalleSalida>();
         }
     
         public int id_epp { get; set; }
@@ -31,6 +32,8 @@ namespace UCSC.Models
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleEntrada> DetalleEntrada { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleSalida> DetalleSalida { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual Usuario Usuario { get; set; }
     }

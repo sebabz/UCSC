@@ -25,6 +25,7 @@ namespace UCSC.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Carrera> Carrera { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<DetalleEntrada> DetalleEntrada { get; set; }
         public virtual DbSet<DetalleSalida> DetalleSalida { get; set; }
@@ -34,6 +35,5 @@ namespace UCSC.Models
         public virtual DbSet<OrdenSalida> OrdenSalida { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Carrera> Carrera { get; set; }
     }
 }

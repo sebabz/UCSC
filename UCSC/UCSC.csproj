@@ -98,6 +98,11 @@
   <ItemGroup>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\BootstrapLogin.css" />
+    <Content Include="Content\bootstrap_tabla.css" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\jquery-3.5.1.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.Rut.js" />
     <Content Include="Content\patterns\1.png" />
     <Content Include="Content\patterns\2.png" />
@@ -143,6 +148,7 @@
     <Content Include="Scripts\plugins\dataTables\dataTables.bootstrap4.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatablesesp.js" />
+    <Content Include="Scripts\plugins\gijgo.min.js" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_555555_256x240.png" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_777620_256x240.png" />
@@ -168,6 +174,7 @@
     <Compile Include="Controllers\EPPController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\OrdenEntradasController.cs" />
+    <Compile Include="Controllers\OrdenSalidaController.cs" />
     <Compile Include="Controllers\TipousuarioController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
@@ -297,6 +304,12 @@
     <Content Include="Views\Carreras\Create.cshtml" />
     <Content Include="Views\Carreras\_Edit.cshtml" />
     <Content Include="Views\Carreras\_Delete.cshtml" />
+    <Content Include="Views\OrdenEntradas\Index.cshtml" />
+    <Content Include="Views\OrdenEntradas\DetalleOrden.cshtml" />
+    <Content Include="Views\OrdenSalida\OrdenSalida.cshtml" />
+    <Content Include="Views\OrdenSalida\ListadoSalidas.cshtml" />
+    <Content Include="Views\OrdenSalida\DetalleOrdenSalida.cshtml" />
+    <Content Include="Views\Usuarios\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -306,7 +319,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\OrdenEntrada\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

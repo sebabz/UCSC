@@ -28,6 +28,7 @@
                     <li class="nav-header">
                         <div class="profile-element">
                             <a href="#">
+
                                 <span class="block m-t-xs font-bold">Usuario</span>
                                 <span class="text-muted text-xs block">Administrador </span>
                             </a>
@@ -79,6 +80,29 @@
                             <li><a href="@Url.Action("Index","Estado")">Listar Estados</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-heartbeat"></i><span class="nav-label">Carreras</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("Create", "Carreras")">Crear Carrera</a></li>
+                            <li><a href="@Url.Action("Index","Carreras")">Listar Carreras</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sign-in"></i><span class="nav-label">Ingreso de Stock</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("OrdenEntrada", "OrdenEntradas")">Ingresar Stock</a></li>
+                            <li><a href="@Url.Action("Index", "OrdenEntradas")">Listar Stock</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sort-amount-asc"></i><span class="nav-label">Solicitud de EPP</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="@Url.Action("OrdenSalida", "OrdenSalida")">Petición de EPP</a></li>
+                            <li><a href="@Url.Action("ListadoSalidas", "OrdenSalida")">Listar Pedidos</a></li>
+                        </ul>
+                    </li>
+
+
                 </ul>
             </div>
         </nav>
@@ -89,8 +113,11 @@
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    </div>
+                        <center>
+                            <img src="https://i.ibb.co/HnMSrgQ/descarga.jpg" class="img-fluid" alt="Responsive image">
+                            </center>
+                            
+</div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li style="padding:20px">
                             <h3><strong>Sistema de Gestión y Seguimiento de EPP </strong></h3>
@@ -103,10 +130,16 @@
                     </ul>
                 </nav>
             </div>
+            <div>
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            </div>
             <!--FIN TOP NAVBAR-->
             @RenderBody()
         </div>
     </div>
 </body>
+
+
+
 </html>
 

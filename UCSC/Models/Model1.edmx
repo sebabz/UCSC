@@ -70,7 +70,7 @@
           <Key>
             <PropertyRef Name="id_orden" />
           </Key>
-          <Property Name="id_orden" Type="int" Nullable="false" />
+          <Property Name="id_orden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fecha_orden" Type="date" Nullable="false" />
           <Property Name="user_entrega" Type="int" />
           <Property Name="user_pide" Type="int" Nullable="false" />
@@ -147,6 +147,18 @@
               <PropertyRef Name="id_epp" />
             </Principal>
             <Dependent Role="DetalleEntrada">
+              <PropertyRef Name="id_epp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleSalida_EPP">
+          <End Role="EPP" Type="Self.EPP" Multiplicity="1" />
+          <End Role="DetalleSalida" Type="Self.DetalleSalida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPP">
+              <PropertyRef Name="id_epp" />
+            </Principal>
+            <Dependent Role="DetalleSalida">
               <PropertyRef Name="id_epp" />
             </Dependent>
           </ReferentialConstraint>
@@ -286,6 +298,10 @@
             <End Role="EPP" EntitySet="EPP" />
             <End Role="DetalleEntrada" EntitySet="DetalleEntrada" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleSalida_EPP" Association="Self.FK_DetalleSalida_EPP">
+            <End Role="EPP" EntitySet="EPP" />
+            <End Role="DetalleSalida" EntitySet="DetalleSalida" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrdenEntrada_Usuario" Association="Self.FK_OrdenEntrada_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="OrdenEntrada" EntitySet="OrdenEntrada" />
@@ -328,6 +344,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="gestion_eppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="gestion_eppEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carrera" EntityType="gestion_eppModel.Carrera" />
           <EntitySet Name="Categoria" EntityType="gestion_eppModel.Categoria" />
           <EntitySet Name="DetalleEntrada" EntityType="gestion_eppModel.DetalleEntrada" />
           <EntitySet Name="DetalleSalida" EntityType="gestion_eppModel.DetalleSalida" />
@@ -337,6 +354,10 @@
           <EntitySet Name="OrdenSalida" EntityType="gestion_eppModel.OrdenSalida" />
           <EntitySet Name="TipoUsuario" EntityType="gestion_eppModel.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="gestion_eppModel.Usuario" />
+          <AssociationSet Name="FK_OrdenSalida_Carrera" Association="gestion_eppModel.FK_OrdenSalida_Carrera">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="OrdenSalida" EntitySet="OrdenSalida" />
+          </AssociationSet>
           <AssociationSet Name="FK_Producto_Categoria" Association="gestion_eppModel.FK_Producto_Categoria">
             <End Role="Categoria" EntitySet="Categoria" />
             <End Role="EPP" EntitySet="EPP" />
@@ -351,6 +372,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_DatalleSalida_OrdenSalida" Association="gestion_eppModel.FK_DatalleSalida_OrdenSalida">
             <End Role="OrdenSalida" EntitySet="OrdenSalida" />
+            <End Role="DetalleSalida" EntitySet="DetalleSalida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleSalida_EPP" Association="gestion_eppModel.FK_DetalleSalida_EPP">
+            <End Role="EPP" EntitySet="EPP" />
             <End Role="DetalleSalida" EntitySet="DetalleSalida" />
           </AssociationSet>
           <AssociationSet Name="FK__EPP__estado__571DF1D5" Association="gestion_eppModel.FK__EPP__estado__571DF1D5">
@@ -385,12 +410,15 @@
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <EntitySet Name="Carrera" EntityType="gestion_eppModel.Carrera" />
-          <AssociationSet Name="FK_OrdenSalida_Carrera" Association="gestion_eppModel.FK_OrdenSalida_Carrera">
-            <End Role="Carrera" EntitySet="Carrera" />
-            <End Role="OrdenSalida" EntitySet="OrdenSalida" />
-          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="id_carrera" />
+          </Key>
+          <Property Name="id_carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_carrera" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrdenSalida" Relationship="gestion_eppModel.FK_OrdenSalida_Carrera" FromRole="Carrera" ToRole="OrdenSalida" />
+        </EntityType>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="id_categoria" />
@@ -420,6 +448,7 @@
           <Property Name="cantidad" Type="Int32" Nullable="false" />
           <Property Name="id_orden" Type="Int32" Nullable="false" />
           <NavigationProperty Name="OrdenSalida" Relationship="gestion_eppModel.FK_DatalleSalida_OrdenSalida" FromRole="DetalleSalida" ToRole="OrdenSalida" />
+          <NavigationProperty Name="EPP" Relationship="gestion_eppModel.FK_DetalleSalida_EPP" FromRole="DetalleSalida" ToRole="EPP" />
         </EntityType>
         <EntityType Name="EPP">
           <Key>
@@ -434,6 +463,7 @@
           <Property Name="id_estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Categoria" Relationship="gestion_eppModel.FK_Producto_Categoria" FromRole="EPP" ToRole="Categoria" />
           <NavigationProperty Name="DetalleEntrada" Relationship="gestion_eppModel.FK_DetalleEntrada_Producto" FromRole="EPP" ToRole="DetalleEntrada" />
+          <NavigationProperty Name="DetalleSalida" Relationship="gestion_eppModel.FK_DetalleSalida_EPP" FromRole="EPP" ToRole="DetalleSalida" />
           <NavigationProperty Name="Estado" Relationship="gestion_eppModel.FK__EPP__estado__571DF1D5" FromRole="EPP" ToRole="Estado" />
           <NavigationProperty Name="Usuario" Relationship="gestion_eppModel.FK_Producto_Usuario" FromRole="EPP" ToRole="Usuario" />
         </EntityType>
@@ -462,7 +492,7 @@
           <Key>
             <PropertyRef Name="id_orden" />
           </Key>
-          <Property Name="id_orden" Type="Int32" Nullable="false" />
+          <Property Name="id_orden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fecha_orden" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="user_entrega" Type="Int32" />
           <Property Name="user_pide" Type="Int32" Nullable="false" />
@@ -474,11 +504,11 @@
           <Property Name="cant_docentes" Type="Int32" />
           <Property Name="comentario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="id_estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carrera" Relationship="gestion_eppModel.FK_OrdenSalida_Carrera" FromRole="OrdenSalida" ToRole="Carrera" />
           <NavigationProperty Name="DetalleSalida" Relationship="gestion_eppModel.FK_DatalleSalida_OrdenSalida" FromRole="OrdenSalida" ToRole="DetalleSalida" />
           <NavigationProperty Name="Estado" Relationship="gestion_eppModel.FK_OrdenSalida_Estado" FromRole="OrdenSalida" ToRole="Estado" />
           <NavigationProperty Name="Usuario" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario" FromRole="OrdenSalida" ToRole="Usuario" />
           <NavigationProperty Name="Usuario1" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario1" FromRole="OrdenSalida" ToRole="Usuario" />
-          <NavigationProperty Name="Carrera" Relationship="gestion_eppModel.FK_OrdenSalida_Carrera" FromRole="OrdenSalida" ToRole="Carrera" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -507,6 +537,18 @@
           <NavigationProperty Name="OrdenSalida1" Relationship="gestion_eppModel.FK_OrdenSalida_Usuario1" FromRole="Usuario" ToRole="OrdenSalida" />
           <NavigationProperty Name="TipoUsuario" Relationship="gestion_eppModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
         </EntityType>
+        <Association Name="FK_OrdenSalida_Carrera">
+          <End Type="gestion_eppModel.Carrera" Role="Carrera" Multiplicity="1" />
+          <End Type="gestion_eppModel.OrdenSalida" Role="OrdenSalida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="id_carrera" />
+            </Principal>
+            <Dependent Role="OrdenSalida">
+              <PropertyRef Name="id_carrera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Producto_Categoria">
           <End Type="gestion_eppModel.Categoria" Role="Categoria" Multiplicity="1" />
           <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="*" />
@@ -552,6 +594,18 @@
             </Principal>
             <Dependent Role="DetalleSalida">
               <PropertyRef Name="id_orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleSalida_EPP">
+          <End Type="gestion_eppModel.EPP" Role="EPP" Multiplicity="1" />
+          <End Type="gestion_eppModel.DetalleSalida" Role="DetalleSalida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EPP">
+              <PropertyRef Name="id_epp" />
+            </Principal>
+            <Dependent Role="DetalleSalida">
+              <PropertyRef Name="id_epp" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -651,32 +705,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Carrera">
-          <Key>
-            <PropertyRef Name="id_carrera" />
-          </Key>
-          <Property Name="id_carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_carrera" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrdenSalida" Relationship="gestion_eppModel.FK_OrdenSalida_Carrera" FromRole="Carrera" ToRole="OrdenSalida" />
-        </EntityType>
-        <Association Name="FK_OrdenSalida_Carrera">
-          <End Type="gestion_eppModel.Carrera" Role="Carrera" Multiplicity="1" />
-          <End Type="gestion_eppModel.OrdenSalida" Role="OrdenSalida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrera">
-              <PropertyRef Name="id_carrera" />
-            </Principal>
-            <Dependent Role="OrdenSalida">
-              <PropertyRef Name="id_carrera" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="gestion_eppModelStoreContainer" CdmEntityContainer="gestion_eppEntities1">
+          <EntitySetMapping Name="Carrera">
+            <EntityTypeMapping TypeName="gestion_eppModel.Carrera">
+              <MappingFragment StoreEntitySet="Carrera">
+                <ScalarProperty Name="nombre_carrera" ColumnName="nombre_carrera" />
+                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Categoria">
             <EntityTypeMapping TypeName="gestion_eppModel.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
@@ -774,14 +816,6 @@
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Carrera">
-            <EntityTypeMapping TypeName="gestion_eppModel.Carrera">
-              <MappingFragment StoreEntitySet="Carrera">
-                <ScalarProperty Name="nombre_carrera" ColumnName="nombre_carrera" />
-                <ScalarProperty Name="id_carrera" ColumnName="id_carrera" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
