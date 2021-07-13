@@ -1,7 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "OrdenEntrada";
-}
+﻿@model UCSC.Models.OrdenEntrada
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <h2>Entrada de Stock</h2>
@@ -47,8 +44,8 @@
 
 
                     </div>
-                   
-                    
+
+
 
                 </div>
                 <div>
@@ -63,7 +60,7 @@
                         <input type="button" id="guardar" value="Guardar" class="btn btn-success" />
                     </div>
                 </div>
-               
+
 
             </div>
         </div>
@@ -77,18 +74,49 @@
 <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 
 <script>
-
-    
-
-
-
     //select2
     let datos = [];
     let id_epp = 0;
     let nombre = '';
 
+    //pasar el modelo como variable de sesión
+    //--------
+
+    //Función recibe un arreglo de datos para utilizar
+    function cargarTablaDetalle(datos) {
+        $('#detalleEPP tbody').empty()
+        for (let i = 0; i < datos.length; i++) {
+            fila = '<tr>';
+            //fila += '<td>' + datos[i].id_epp + '</td>';
+            //fila += '<td>' + datos[i].nombre + '</td>';
+            //fila += '<td>' + datos[i].cantidad + '</td>';
+            fila += '<td>' + datos[i] + '</td>';
+            fila += '<td>' + datos[i] + '</td>';
+            fila += '<td>' + datos[i] + '</td>';
+            fila += "<td><button class='btn btn-danger eliminar'><span class='fa fa-trash'></span></button>";
+            fila += '</tr>';
+            f
+            $('#detalleEPP tbody').append(fila);
+            eliminar();
+        }
+    }
+
+
+
+    //Función para cargar la tablA EN EL INIT
+    $(document).ready(function ()
+    {
+        datos.push("id_epp");
+        datos.push("id_nombre");
+        datos.push("id_cantidad");
+        cargarTablaDetalle(datos);
+    });
+
+   
+
     $('.select2').select2();
 
+    
     $('#agregar').click(function () {
 
         let error = '';
@@ -125,21 +153,8 @@
                 datos.push(modelo);
             }
 
-            cargarTablaDetalle();
+            cargarTablaDetalle(datos);
             limpiar();
-        }
-        function cargarTablaDetalle() {
-            $('#detalleEPP tbody').empty()
-            for (let i = 0; i < datos.length; i++) {
-                fila = '<tr>';
-                fila += '<td>' + datos[i].id_epp + '</td>';
-                fila += '<td>' + datos[i].nombre + '</td>';
-                fila += '<td>' + datos[i].cantidad + '</td>';
-                fila += "<td><button class='btn btn-danger eliminar'><span class='fa fa-trash'></span></button>";
-                fila += '</tr>';
-                $('#detalleEPP tbody').append(fila);
-                eliminar();
-            }
         }
 
         function eliminar() {
@@ -166,7 +181,7 @@
             }
 
     });
-    
+
     $('#guardar').click(function () {
         //validación de datos
         let error = '';
@@ -204,9 +219,9 @@
             });
         }
     });
-    
 
-   
+
+
 
 
 

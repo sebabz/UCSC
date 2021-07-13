@@ -31,14 +31,12 @@ namespace UCSC.Controllers
             orden.user_pide = 1015;
             orden.user_entrega = 1015;
             orden.id_estado = 5;
-            
-            orden.fecha_requerida = DateTime.Now;
-            
+                        
             db.OrdenSalida.Add(orden);
             db.SaveChanges();
 
-            var idDet = orden.id_orden;
 
+            var idDet = orden.id_orden;
             foreach (var item in detalles)
             {
 
@@ -72,6 +70,10 @@ namespace UCSC.Controllers
             var detalle = db.OrdenSalida.Find(id);
             return View(detalle);
         }
+
+
+
+
 
 
     }

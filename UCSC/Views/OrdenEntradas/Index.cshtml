@@ -19,6 +19,8 @@
                 <th>Usuario Ingreso</th>
                 <th>Comentario</th>
                 <th>Ver detalles</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -30,9 +32,21 @@
                     <td>@item.Usuario.nombre</td>
                     <td>@item.comentario</td>
                     <td style="white-space: nowrap">
-                        <a href="@Url.Action("DetalleOrden","OrdenEntradas",new { id = item.id_orden })" target="_blank" class="btn btn-warning">
+                        <a href="@Url.Action("DetalleOrden","OrdenEntradas",new { id = item.id_orden })" target="_blank" class="btn btn-success">
                             <i class="fa fa-list"></i>
                         </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning" data-toggle="modal"
+                                data-url="@Url.Action("Edit","OrdenEntradas",new { id = item.id_orden })">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" data-toggle="modal"
+                                data-url="@Url.Action("Delete","OrdenEntradas", new { id = item.id_orden })">
+                            <i class="fa fa-trash"></i>
+                        </button>
                     </td>
                 </tr>
             }
@@ -65,4 +79,24 @@
     $(document).ready(function () {
         $('#tabla').DataTable();
     });
+</script>
+
+<div class="modal fade" id="modalEdit"></div>
+<div class="modal fade" id="modalDelete"></div>
+<script>
+    $('.btn-warning').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function (data) {
+            $('#modalEdit').html(data);
+            $('#modalEdit').modal('show');
+        });
+    });
+    $('.btn-danger').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function (data) {
+            $('#modalDelete').html(data);
+            $('#modalDelete').modal('show');
+        });
+    });
+
 </script>

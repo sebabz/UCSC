@@ -310,6 +310,8 @@
     <Content Include="Views\OrdenSalida\ListadoSalidas.cshtml" />
     <Content Include="Views\OrdenSalida\DetalleOrdenSalida.cshtml" />
     <Content Include="Views\Usuarios\Login.cshtml" />
+    <Content Include="Views\OrdenEntradas\_Delete.cshtml" />
+    <Content Include="Views\OrdenEntradas\_Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
