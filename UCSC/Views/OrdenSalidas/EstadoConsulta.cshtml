@@ -44,15 +44,21 @@
                 </div>
 
                 <!-- Login Form -->
-                <form method="post" action="@Url.Action("PopupEstadoConsulta","OrdenSalidas")">
+                <form >
                     <h4><span class="label label-default">Ingrese numero de Pedido: </span></h4>
                     <input type="text" id="id_pedido" class="fadeIn second" name="id_pedido" placeholder="Por ejemplo: 1111">
 
                     <div>
-                        <button class="btn btn-primary" data-toggle="modal">
+                        <input type="submit" class="btn btn-warning" data-toggle="modal" id="botonestado">
+                            <i class="fa fa-edit"></i> consultar
+                        </>
 
-                            <i class="fa fa-edit"></i> Consultar
-                        </button>
+
+                        @*<input type="submit" value="Consultar" />*@
+                        @*<button class="btn btn-primary" data-toggle="modal">
+
+            <i class="fa fa-edit"></i> Consultar
+        </button>*@
                     </div>
                     <div>
 
@@ -73,23 +79,19 @@
 
 
 
-<script src="~/Scripts/plugins/moment.min.js"></script>
-
-
-<script src="~/Scripts/jquery.dataTables.min.js"></script>
-<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
 
 <div class="modal fade" id="modalEdit"></div>
 
 <script>
-    $('.btn-warning').click(function () {
+    
 
-
-
+    $('#botonestado').click(function () {
+        let url = '/OrdenSalidas/PopupEstadoConsulta';
+        let data = $('#id_pedido').val();
         $.get(url, function (data) {
-            
+            $('#modalEdit').html(data);
             $('#modalEdit').modal('show');
         });
     });
-</script>
 
+</script>

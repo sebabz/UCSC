@@ -76,7 +76,7 @@ namespace UCSC.Controllers
         
        
     
-        public ActionResult EstadoConsulta()
+        public ActionResult EstadoConsulta(int? id)
         {
 
             var consulta = db.OrdenSalida.Find(id);
@@ -84,12 +84,12 @@ namespace UCSC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult PopupEstadoConsulta(int consulta)
+        
+        public ActionResult PopupEstadoConsulta(int? id_pedido)
         {
-
-
-            return Json("");
+            OrdenSalida orden = db.OrdenSalida.Find(id_pedido);
+            return PartialView("_PopupEstadoConsulta", orden);
+            
         }
 
 
