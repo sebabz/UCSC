@@ -174,7 +174,7 @@
     <Compile Include="Controllers\EPPController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\OrdenEntradasController.cs" />
-    <Compile Include="Controllers\OrdenSalidaController.cs" />
+    <Compile Include="Controllers\OrdenSalidasController.cs" />
     <Compile Include="Controllers\TipousuarioController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
@@ -306,12 +306,17 @@
     <Content Include="Views\Carreras\_Delete.cshtml" />
     <Content Include="Views\OrdenEntradas\Index.cshtml" />
     <Content Include="Views\OrdenEntradas\DetalleOrden.cshtml" />
-    <Content Include="Views\OrdenSalida\OrdenSalida.cshtml" />
-    <Content Include="Views\OrdenSalida\ListadoSalidas.cshtml" />
-    <Content Include="Views\OrdenSalida\DetalleOrdenSalida.cshtml" />
+    <Content Include="Views\OrdenSalidas\OrdenSalida.cshtml" />
+    <Content Include="Views\OrdenSalidas\ListadoSalidas.cshtml" />
+    <Content Include="Views\OrdenSalidas\DetalleOrdenSalida.cshtml" />
     <Content Include="Views\Usuarios\Login.cshtml" />
     <Content Include="Views\OrdenEntradas\_Delete.cshtml" />
     <Content Include="Views\OrdenEntradas\_Edit.cshtml" />
+    <Content Include="Views\Shared\_MenuAdmin.cshtml" />
+    <Content Include="Views\Shared\_MenuEncargado.cshtml" />
+    <Content Include="Views\Shared\_MenuUsuario.cshtml" />
+    <Content Include="Views\OrdenSalidas\EstadoConsulta.cshtml" />
+    <Content Include="Views\OrdenSalidas\_PopupEstadoConsulta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace UCSC.Controllers
 {
-    public class OrdenSalidaController : Controller
+    public class OrdenSalidasController : Controller
     {
         private gestion_eppEntities1 db = new gestion_eppEntities1();
         // GET: OrdenSalida
@@ -71,7 +71,26 @@ namespace UCSC.Controllers
             return View(detalle);
         }
 
+    
+        
+        
+       
+    
+        public ActionResult EstadoConsulta()
+        {
 
+            var consulta = db.OrdenSalida.Find(id);
+            //var ordenes = db.OrdenSalida.Where(s=> s.id_orden == id);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PopupEstadoConsulta(int consulta)
+        {
+
+
+            return Json("");
+        }
 
 
 

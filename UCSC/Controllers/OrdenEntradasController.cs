@@ -145,10 +145,10 @@ namespace UCSC.Controllers
         public ActionResult Edit(int? id)
         {
             ViewBag.epp = new SelectList(db.EPP, "id_epp", "nombre");
-            var detalleEntrada = db.DetalleEntrada.Where(d => d.id_detalle == id);
-            //var detalleEntrada = db.DetalleEntrada.Find(id);
+            //var detalleEntrada = db.DetalleEntrada.Where(d => d.id_detalle == id);
+            var detalleEntrada = db.DetalleEntrada.Find(id);
 
-           
+
             return PartialView("_Edit", detalleEntrada);
         }
         [HttpPost]

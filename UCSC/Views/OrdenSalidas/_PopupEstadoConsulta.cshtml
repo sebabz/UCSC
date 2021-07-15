@@ -1,0 +1,42 @@
+﻿@model UCSC.Models.OrdenSalida
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Detalle Usuario</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <input type="hidden" id="id_orden" value="@Model.id_orden" />
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Nombre:</label>
+                <div class="col-10">
+                    <input type="text" name="nombre" id="nombre" value="@Model.id_estado" class="form-control" />
+                </div>
+            </div>
+                        
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+           
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery.Rut.js" type="text/javascript"></script>
+<script>
+
+   
+
+   
+
+
+</script>
+
+

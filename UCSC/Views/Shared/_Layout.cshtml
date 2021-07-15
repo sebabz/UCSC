@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="refresh" content="1800;url=../Usuario/Logout" />
     <title>@ViewBag.Title</title>
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -29,8 +30,8 @@
                         <div class="profile-element">
                             <a href="#">
 
-                                <span class="block m-t-xs font-bold">Usuario</span>
-                                <span class="text-muted text-xs block">Administrador </span>
+                                <span class="block m-t-xs font-bold">@Session["usuario"]</span>
+                                <span class="text-muted text-xs block">@Session["tipoUsuario"]</span>
                             </a>
                         </div>
                         <div class="logo-element">
@@ -38,69 +39,27 @@
                         </div>
                     </li>
                     <!--Agregar links al menú -->
-                    @*<li>
-            <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">Marcas</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level collapse">
-                <li><a href="@Url.Action("Create", "Marcas")">Crear Marca</a></li>
-                <li><a href="@Url.Action("Index", "Marcas")">Lista Marcas</a></li>
-            </ul>
-        </li>*@
-                    <li>
-                        <a href="#"><i class="fa fa-amazon"></i><span class="nav-label">Categorías</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "Categorias")">Crear Categoría</a></li>
-                            <li><a href="@Url.Action("Index", "Categorias")">Lista Categorías</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-ambulance"></i><span class="nav-label"> EPP </span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "EPP")">Crear EPP</a></li>
-                            <li><a href="@Url.Action("Index","EPP")">Lista EPP</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-address-book"></i><span class="nav-label">Usuario</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "Usuarios")">Crear Usuario</a></li>
-                            <li><a href="@Url.Action("Index","Usuarios")">Listar Usuarios</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-users"></i><span class="nav-label">Tipos de Usuario</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "TipoUsuario")">Crear Tipo de Usuario</a></li>
-                            <li><a href="@Url.Action("Index","TipoUsuario")">Listar Tipos de Usuarios</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-etsy"></i><span class="nav-label">Estados</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "Estado")">Crear Estado</a></li>
-                            <li><a href="@Url.Action("Index","Estado")">Listar Estados</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-heartbeat"></i><span class="nav-label">Carreras</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("Create", "Carreras")">Crear Carrera</a></li>
-                            <li><a href="@Url.Action("Index","Carreras")">Listar Carreras</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sign-in"></i><span class="nav-label">Ingreso de Stock</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("OrdenEntrada", "OrdenEntradas")">Ingresar Stock</a></li>
-                            <li><a href="@Url.Action("Index", "OrdenEntradas")">Listar Stock</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-sort-amount-asc"></i><span class="nav-label">Solicitud de EPP</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li><a href="@Url.Action("OrdenSalida", "OrdenSalida")">Petición de EPP</a></li>
-                            <li><a href="@Url.Action("ListadoSalidas", "OrdenSalida")">Listar Pedidos</a></li>
-                        </ul>
-                    </li>
+                    @if (Session["tipoUsuario"] != null)
+                    {
+
+                        if (Session["tipoUsuario"].Equals("Administrador"))
+                        {
+                            @Html.Partial("_MenuAdmin")
+                        }
+                        if (Session["tipoUsuario"].Equals("Encargado"))
+                        {
+                            @Html.Partial("_MenuEncargado")
+                        }
+                        if (Session["tipoUsuario"].Equals("Usuario"))
+                        {
+                            @Html.Partial("_MenuUsuario")
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/");
+                    }
+
 
 
                 </ul>
@@ -123,7 +82,7 @@
                             <h3><strong>Sistema de Gestión y Seguimiento de EPP </strong></h3>
                         </li>
                         <li>
-                            <a>
+                            <a href="@Url.Action("Logout","Usuarios")">
                                 <i class="fa fa-sign-out"></i> Desconectarse
                             </a>
                         </li>
@@ -131,7 +90,7 @@
                 </nav>
             </div>
             <div>
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                @*<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>*@
             </div>
             <!--FIN TOP NAVBAR-->
             @RenderBody()

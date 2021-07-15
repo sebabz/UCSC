@@ -1,4 +1,4 @@
-﻿@model UCSC.Models.OrdenEntrada
+﻿@model UCSC.Models.DetalleEntrada
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <h2>Entrada de Stock</h2>
@@ -11,7 +11,8 @@
                 <h3>Ingrese los datos de la entrada de Stock</h3>
             </div>
             <div class="ibox-content">
-
+                <input type="hidden" id="id_orden" value="@Model.id_orden" />
+                
                 <div class="form-group row">
                     <label class="col-sm-1">Nombre: </label>
                     <div class="col-sm-4">
@@ -38,7 +39,9 @@
                                     <th>Cantidad</th>
                                 </tr>
                             </thead>
-                            <tbody> </tbody>
+                            <tbody>
+                                
+                            </tbody>
                         </table>
 
 
@@ -77,13 +80,17 @@
     //select2
     let datos = [];
     let id_epp = 0;
+    let id_orden = 0;
     let nombre = '';
+    let nombreParaEdita = "";
+    let cantidadParaEdit = "";
 
     //pasar el modelo como variable de sesión
     //--------
 
     //Función recibe un arreglo de datos para utilizar
     function cargarTablaDetalle(datos) {
+
         $('#detalleEPP tbody').empty()
         for (let i = 0; i < datos.length; i++) {
             fila = '<tr>';
@@ -95,7 +102,7 @@
             fila += '<td>' + datos[i] + '</td>';
             fila += "<td><button class='btn btn-danger eliminar'><span class='fa fa-trash'></span></button>";
             fila += '</tr>';
-            f
+
             $('#detalleEPP tbody').append(fila);
             eliminar();
         }
@@ -106,17 +113,28 @@
     //Función para cargar la tablA EN EL INIT
     $(document).ready(function ()
     {
-        datos.push("id_epp");
-        datos.push("id_nombre");
-        datos.push("id_cantidad");
+
+
+
+        @*let modelo = {
+
+            id_orden: @Model.id_orden,
+            nombreParaEdita: @Model.EPP.nombre,
+            cantidadParaEdit: parseInt(@Model.cantidad),
+        };*@
+
+
+        alert(@Model.id_orden);
+
+        datos.push(modelo);
         cargarTablaDetalle(datos);
     });
 
-   
+
 
     $('.select2').select2();
 
-    
+
     $('#agregar').click(function () {
 
         let error = '';
@@ -129,6 +147,7 @@
             swal('Error', error, 'warning');
         else {
             let modelo = {
+               
                 id_epp: $('#epp').val().trim(),
                 nombre: $('#epp option:selected').text(),
                 cantidad: $('#cantidad').val()
@@ -157,28 +176,7 @@
             limpiar();
         }
 
-        function eliminar() {
-            $('.eliminar').click(function () {
-
-                //obtener el código de la fila donde se presiona el botón de trash
-                let cod = $(this).parents('tr').find('td').eq(0).html();
-                for (let i = 0; i < datos.length; i++) {
-                    if (datos[i].id_epp == cod) {
-                        datos.splice(i, 1);//splice sirve para sacar elementos del arreglo
-                    }
-                }
-                //llamar a función cargar tabla para recargar el arreglo en la tabla
-                cargarTablaDetalle();
-                //si la cantidad de elementos que hay en la tabla es == 0 la oculta
-
-            });
-        }
-
-        function limpiar() {
-            $('#cantidad').val('');
-            $('#epp').val('');
-            $('#epp').select2("val", "");
-            }
+        
 
     });
 
@@ -221,7 +219,29 @@
     });
 
 
+    function eliminar() {
+        $('.eliminar').click(function () {
 
+            //obtener el código de la fila donde se presiona el botón de trash
+            let cod = $(this).parents('tr').find('td').eq(0).html();
+            for (let i = 0; i < datos.length; i++) {
+                if (datos[i].id_epp == cod) {
+                    datos.splice(i, 1);//splice sirve para sacar elementos del arreglo
+                }
+            }
+            //llamar a función cargar tabla para recargar el arreglo en la tabla
+            cargarTablaDetalle();
+            //si la cantidad de elementos que hay en la tabla es == 0 la oculta
+
+        });
+    }
+
+    function limpiar() {
+
+        $('#cantidad').val('');
+        $('#epp').val();
+        $('#epp').select2("val", "");
+    }
 
 
 
