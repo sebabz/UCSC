@@ -173,6 +173,7 @@
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\EPPController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
+    <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\OrdenEntradasController.cs" />
     <Compile Include="Controllers\OrdenSalidasController.cs" />
     <Compile Include="Controllers\TipousuarioController.cs" />
@@ -317,6 +318,10 @@
     <Content Include="Views\Shared\_MenuUsuario.cshtml" />
     <Content Include="Views\OrdenSalidas\EstadoConsulta.cshtml" />
     <Content Include="Views\OrdenSalidas\_PopupEstadoConsulta.cshtml" />
+    <Content Include="Views\OrdenSalidas\Saberestado.cshtml" />
+    <Content Include="Views\Inicio\Inicio.cshtml" />
+    <Content Include="Views\OrdenSalidas\_popap.cshtml" />
+    <Content Include="Views\OrdenSalidas\Parchalbiu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

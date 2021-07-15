@@ -1,0 +1,63 @@
+﻿@model UCSC.Models.OrdenSalida
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+        <meta name="viewport" content="width=device-width" />
+        <title>Login</title>
+        <link href="~/Content/BootstrapLogin.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    
+</head>
+<body>
+
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Detalle EPP</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <input type="hidden" id="id_epp" value="@Model.id_estado" />
+
+                <div class="form-group row">
+                    <label class="col-2 text-right">Categoria:</label>
+                    <div class="col-10">
+
+
+                        @Model.Estado.nombre
+                        @*@Html.DropDownList("estado", null, htmlAttributes: new { @class = "form-control" })*@
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+
+
+
+</script>

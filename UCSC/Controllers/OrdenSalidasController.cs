@@ -92,8 +92,28 @@ namespace UCSC.Controllers
             
         }
 
+        public ActionResult Saberestado() //index 
+        {
 
 
+            return View();
+        }
+
+
+        public ActionResult Parchalbiu(int? id)
+        {
+            var ordencita = db.OrdenSalida.Find(id);
+            //ViewBag.ordencita = new SelectList(db.Estado, "id_estado", "nombre", ordencita.id_estado);
+            return PartialView("_PopupEstadoConsulta", ordencita);
+        }
+
+        [HttpPost]
+        public ActionResult Saberestado(int estadoreal)
+        {
+            var estado = db.OrdenSalida.FirstOrDefault(u => u.id_orden.Equals(estadoreal));
+    
+            return View("Parchalbiu", estado);
+        }
 
     }
 }

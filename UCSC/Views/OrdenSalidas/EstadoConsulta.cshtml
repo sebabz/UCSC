@@ -44,14 +44,14 @@
                 </div>
 
                 <!-- Login Form -->
-                <form >
+                
                     <h4><span class="label label-default">Ingrese numero de Pedido: </span></h4>
                     <input type="text" id="id_pedido" class="fadeIn second" name="id_pedido" placeholder="Por ejemplo: 1111">
 
                     <div>
                         <input type="submit" class="btn btn-warning" data-toggle="modal" id="botonestado">
-                            <i class="fa fa-edit"></i> consultar
-                        </>
+                        
+                        
 
 
                         @*<input type="submit" value="Consultar" />*@
@@ -60,12 +60,10 @@
             <i class="fa fa-edit"></i> Consultar
         </button>*@
                     </div>
-                    <div>
-
-                    </div>
+                   
 
 
-                </form>
+              
 
                 <!-- Remind Passowrd -->
 
@@ -85,7 +83,7 @@
 <script>
     
 
-    $('#botonestado').click(function () {
+    $('#id_pedido').click(function () {
         let url = '/OrdenSalidas/PopupEstadoConsulta';
         let data = $('#id_pedido').val();
         $.get(url, function (data) {

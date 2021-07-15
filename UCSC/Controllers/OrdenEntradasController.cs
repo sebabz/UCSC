@@ -104,7 +104,7 @@ namespace UCSC.Controllers
                 if (fila.id_orden == id)
                 {
                     datoParaEliminar = fila.id_detalle;
-                    break;
+                    //break;
                 }
             }
 

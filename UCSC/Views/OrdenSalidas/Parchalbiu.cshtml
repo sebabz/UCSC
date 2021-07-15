@@ -1,4 +1,5 @@
-﻿
+﻿@model UCSC.Models.OrdenSalida
+
 @{
     Layout = null;
 }
@@ -8,41 +9,41 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <title>Estado Pedido de EPP</title>
     <link href="~/Content/BootstrapLogin.css" rel="stylesheet" id="bootstrap-css">
+
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
-
-    
 
 
 </head>
 <body>
     <div>
-        
+
         <!------ Include the above in your HEAD tag ---------->
 
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Tabs Titles -->
                 <!-- Icon -->
-              
+
                 <div class="fadeIn first">
                     <img src="https://i.ibb.co/HnMSrgQ/descarga.jpg" id="icon" alt="User Icon" />
                 </div>
 
                 <!-- Login Form -->
-                <form action="@Url.Action("Login")" method="post">
-                    <input type="text" id="login" class="fadeIn second" name="email" placeholder="Login">
-                    <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Contraseña">
-                    <input type="submit" class="fadeIn fourth" value="Ingresar">
+                <form>
+                    <input type="text" placeholder=" @Model.Estado.nombre" disabled>
+
+                    
+                    
                 </form>
+                <div>
+                    <h6><span class="label label-info">Para cualquier consulta sobre el estado de su Pedido de EPP, puede comunicarse al correo: asistente.medicina@ucsc.cl</span></h6>
+                </div>
 
-                <!-- Remind Passowrd -->
-                
 
-                <a href="~/OrdenSalidas/Saberestado">Consulta el estado de tu pedido aqui</a>
+             
 
             </div>
         </div>
@@ -51,4 +52,15 @@
 </body>
 </html>
 
+<script>
 
+    $(document).ready(function () {
+
+        let varimagen = @Model.Estado.nombre
+        alert(varimagen)
+
+    });
+
+   
+
+</script>
