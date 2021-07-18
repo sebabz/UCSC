@@ -42,7 +42,7 @@
 
                 int idUsuario = int.Parse(Session["idusuario"].ToString());
 
-                if (item.user_pide == idUsuario && int.Parse(Session["idTipoUsuario"].ToString()) != 1006)
+                if ( int.Parse(Session["idTipoUsuario"].ToString()) == 2009 && item.user_pide == idUsuario)
                 {
                     <tr>
                         <td>@item.id_orden</td>
@@ -66,7 +66,7 @@
                         </td>
                         <td>
                             <button class="btn btn-warning" data-toggle="modal"
-                                    data-url="@Url.Action("Edit","OrdenEntradas",new { id = item.id_orden })">
+                                    data-url="@Url.Action("EditarOrden","OrdenSalidas",new { id = item.id_orden })">
                                 <i class="fa fa-edit"></i>
                             </button>
                         </td>
@@ -102,7 +102,7 @@
                         </td>
                         <td>
                             <button class="btn btn-warning" data-toggle="modal"
-                                    data-url="@Url.Action("Edit","OrdenEntradas",new { id = item.id_orden })">
+                                    data-url="@Url.Action("EditarOrden","OrdenSalidas",new { id = item.id_orden })">
                                 <i class="fa fa-edit"></i>
                             </button>
                         </td>

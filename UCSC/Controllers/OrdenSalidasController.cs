@@ -73,18 +73,13 @@ namespace UCSC.Controllers
             
         public ActionResult Saberestado() //index 
         {
-
-
             return View();
         }
-
 
         public ActionResult Parchalbiu(int? id)
         {
             var ordencita = db.OrdenSalida.Find(id);
-            //ViewBag.ordencita = new SelectList(db.Estado, "id_estado", "nombre", ordencita.id_estado);
-             return PartialView("_PopupEstadoConsulta", ordencita);
-            //return PartialView("_PopupEstadoConsulta", ordencita);
+            return PartialView("_PopupEstadoConsulta", ordencita);
         }
 
         [HttpPost]
@@ -94,10 +89,7 @@ namespace UCSC.Controllers
     
             return View("Parchalbiu", estado);
         }
-
-
-
-        
+                
         public ActionResult Delete(int id)
         {
             var ordensalida = db.OrdenSalida.Find(id);
@@ -109,9 +101,7 @@ namespace UCSC.Controllers
             try
             {
                 var ordenSal = db.OrdenSalida.OrderBy(o => o.id_orden).Include(o => o.DetalleSalida).First();
-
                 db.OrdenSalida.Remove(ordenSal);
-
                 db.SaveChanges();
                 return Json("");
             }
@@ -120,14 +110,32 @@ namespace UCSC.Controllers
                 return Json("No se puede eliminar esta orden");
                 throw;
             }
-
-
-
-
-
-
         }
 
+        public ActionResult EditarOrden(int? id)
+        {
+            var ordensalida = db.OrdenSalida.Find(id);
+            ViewBag.carrera = new SelectList(db.Carrera, "id_carrera", "nombre_carrera", ordensalida.id_carrera);
+            ViewBag.estado = new SelectList(db.Estado, "id_estado", "nombre", ordensalida.id_estado);
+
+            return PartialView("_EditarOrden", ordensalida);
+        }
+
+        [HttpPost]
+        public ActionResult EditarOrden(OrdenSalida ordensalida)
+        {
+            try
+            {
+                db.Entry(ordensalida).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json("");
+            }
+            catch (Exception)
+            {
+                return Json("No se ha podido editar");
+                throw;
+            }
+        }
 
     }
 }

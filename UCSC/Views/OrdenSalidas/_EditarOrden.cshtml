@@ -1,0 +1,175 @@
+﻿@model UCSC.Models.OrdenSalida
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Editar Detalle Orden</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <input type="hidden" id="id_orden" value="@Model.id_orden" />
+            <input type="hidden" id="usuariopide" value=@int.Parse(Session["idusuario"].ToString()) />
+            <input type="hidden" id="fechasolicitada" value="@Model.fecha_requerida" />
+            <input type="hidden" id="fechahoy" value="@DateTime.Now" />
+            <input type="hidden" id="usuarioentrega" value="1015" />
+
+        </div>
+
+        <div class="form-group row">
+            <label class="col-3 text-right">Personal que entrega:</label>
+            <div class="col-8">
+                <input type="text" name="user_entrega" class="form-control" id="user_entrega" value="@Model.user_entrega" />
+            </div>
+
+
+            <label class="col-3 text-right">Centro Clinico:</label>
+            <div class="col-8">
+                <input type="text" name="ubicacion" class="form-control" id="ubicacion" value="@Model.ubicacion" />
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <label class="col-3 text-right">Carrera:</label>
+            <div class="col-8">
+                @Html.DropDownList("carrera", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <br />
+            <br />
+
+            <label class="col-3 text-right">Periodo Uso:</label>
+            <div class="col-8">
+                <input type="text" name="periodo" value="@Model.periodo_uso" class="form-control" id="periodo" />
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <label class="col-3 text-right">Estado:</label>
+            <div class="col-8">
+                @Html.DropDownList("estado", null, htmlAttributes: new { @class = "form-control" })
+
+            </div>
+                       
+
+        </div>
+
+
+
+        <div class="form-group row">
+            <label class="col-3 text-right">Cantidad de Alumnos:</label>
+            <div class="col-8">
+                <input type="number" min="0" name="cantidadalumno" id="cantidadalumno" value="@Model.cant_alumnos" class="form-control solonumeros" />
+
+            </div>
+
+            <label class="col-3 text-right">Cantidad de Docentes:</label>
+            <div class="col-8">
+                <input type="number" min="0" name="cantidaddocentes" class="form-control" id="cantidaddocentes" value="@Model.cant_docentes" />
+            </div>
+
+
+
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-3 text-right">Comentario:</label>
+            <div class="col-8">
+                <input type="text" id="comentario" class="form-control" value="@Model.comentario" />
+            </div>
+        </div>
+
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <input type="button" value="Editar" class="btn btn-primary" id="editar" />
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+
+<link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Scripts/plugins/select2/select2.full.min.js"></script>
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Scripts/plugins/daterangepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" crossorigin="anonymous"></script>
+
+
+<script>
+    let datos = [];
+    let id_epp = 0;
+    let nombre = '';
+
+    $('.select2').select2();
+
+
+    $('#editar').click(function () {
+
+        let error = '';
+
+       
+
+        if (error != '') {
+            swal('Error validación', error, 'error');
+        }
+        else
+        {
+            const ordensalida = {
+                id_orden: $('#id_orden').val(),
+                id_estado: $('#estado').val(),
+                fecha_orden: $('#fechahoy').val(),
+                ubicacion: $('#ubicacion').val(),
+                id_carrera: $('#carrera').val(),
+                user_pide: $('#usuariopide').val(),
+                user_entrega: $('#usuarioentrega').val(),
+                periodo_uso: $('#periodo').val(),
+                cant_alumnos: $('#cantidadalumno').val(),
+                fecha_requerida: $('#fechasolicitada').val(),
+                cant_docentes: $('#cantidaddocentes').val(),
+                comentario: $('#comentario').val()
+
+
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EditarOrden")',
+                data: '{ordensalida:' + JSON.stringify(ordensalida) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (resp) {
+                    if (resp == "") {
+                        $('#modalEdit').modal('hide');
+                        swal({
+                            title: 'Modificar Orden',
+                            text: 'Los datos se han guardado con éxito!',
+                            icon: 'success',
+                            button: 'Cerrar',
+
+                            closeOnClickOutside: false,
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+
+</script>
+
+

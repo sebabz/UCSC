@@ -41,3 +41,18 @@ else
 {
     Response.Redirect("~/Usuarios/Login");
 }
+
+
+<div class="modal fade" id="modalEdit"></div>
+
+<script>
+    $('.btn-warning').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function (data) {
+            $('#modalEdit').html(data);
+            $('#modalEdit').modal('show');
+        });
+    });
+
+
+</script>
