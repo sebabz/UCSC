@@ -28,7 +28,6 @@ namespace UCSC.Controllers
         public JsonResult OrdenSalida(OrdenSalida orden, List<DetalleSalida> detalles)
         {
             orden.fecha_orden = DateTime.Now;
-            orden.user_pide = 1015;
             orden.user_entrega = 1015;
             orden.id_estado = 5;
                         
@@ -42,8 +41,8 @@ namespace UCSC.Controllers
 
                 item.id_orden = idDet;
                 db.DetalleSalida.Add(item);
-
-                ActualizaStock(item.id_epp, item.cantidad);
+                
+                ActualizaStock((int)item.id_epp, item.cantidad);
                 db.SaveChanges();
             }
 
@@ -71,27 +70,7 @@ namespace UCSC.Controllers
             return View(detalle);
         }
 
-    
-        
-        
-       
-    
-        public ActionResult EstadoConsulta(int? id)
-        {
-
-            var consulta = db.OrdenSalida.Find(id);
-            //var ordenes = db.OrdenSalida.Where(s=> s.id_orden == id);
-            return View();
-        }
-
-        
-        public ActionResult PopupEstadoConsulta(int? id_pedido)
-        {
-            OrdenSalida orden = db.OrdenSalida.Find(id_pedido);
-            return PartialView("_PopupEstadoConsulta", orden);
             
-        }
-
         public ActionResult Saberestado() //index 
         {
 
@@ -104,7 +83,8 @@ namespace UCSC.Controllers
         {
             var ordencita = db.OrdenSalida.Find(id);
             //ViewBag.ordencita = new SelectList(db.Estado, "id_estado", "nombre", ordencita.id_estado);
-            return PartialView("_PopupEstadoConsulta", ordencita);
+             return PartialView("_PopupEstadoConsulta", ordencita);
+            //return PartialView("_PopupEstadoConsulta", ordencita);
         }
 
         [HttpPost]
@@ -114,6 +94,40 @@ namespace UCSC.Controllers
     
             return View("Parchalbiu", estado);
         }
+
+
+
+        
+        public ActionResult Delete(int id)
+        {
+            var ordensalida = db.OrdenSalida.Find(id);
+            return PartialView("_Delete", ordensalida);
+        }
+
+        public ActionResult Eliminar(int id)
+        {
+            try
+            {
+                var ordenSal = db.OrdenSalida.OrderBy(o => o.id_orden).Include(o => o.DetalleSalida).First();
+
+                db.OrdenSalida.Remove(ordenSal);
+
+                db.SaveChanges();
+                return Json("");
+            }
+            catch (Exception ex)
+            {
+                return Json("No se puede eliminar esta orden");
+                throw;
+            }
+
+
+
+
+
+
+        }
+
 
     }
 }

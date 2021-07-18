@@ -25,7 +25,7 @@ namespace UCSC.Controllers
         public ActionResult Create()
         {
             ViewBag.categoria = new SelectList(db.Categoria, "id_categoria", "nombre");
-            ViewBag.usuario = new SelectList(db.Usuario, "id_usuario", "nombre");
+            //ViewBag.usuario = new SelectList(db.Usuario, "id_usuario", "nombre");
 
             return View();
         }

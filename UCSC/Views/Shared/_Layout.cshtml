@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@if (Session["tipoUsuario"] != null)
+{
+    <!DOCTYPE html>
+
 
 <html>
 <head>
@@ -57,7 +60,7 @@
                     }
                     else
                     {
-                        Response.Redirect("~/");
+                        Response.Redirect("~/Usuarios/Login");
                     }
 
 
@@ -74,15 +77,15 @@
                     <div class="navbar-header">
                         <center>
                             <img src="https://i.ibb.co/HnMSrgQ/descarga.jpg" class="img-fluid" alt="Responsive image">
-                            </center>
-                            
-</div>
+                        </center>
+
+                    </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li style="padding:20px">
                             <h3><strong>Sistema de Gestión y Seguimiento de EPP </strong></h3>
                         </li>
                         <li>
-                            <a href="@Url.Action("Logout","Usuarios")">
+                            <a href="@Url.Action("Logout", "Usuarios")">
                                 <i class="fa fa-sign-out"></i> Desconectarse
                             </a>
                         </li>
@@ -101,4 +104,8 @@
 
 
 </html>
-
+}
+else
+{
+    Response.Redirect("~/Usuarios/Login");
+}

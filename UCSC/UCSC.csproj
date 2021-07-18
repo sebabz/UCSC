@@ -322,6 +322,10 @@
     <Content Include="Views\Inicio\Inicio.cshtml" />
     <Content Include="Views\OrdenSalidas\_popap.cshtml" />
     <Content Include="Views\OrdenSalidas\Parchalbiu.cshtml" />
+    <Content Include="Views\OrdenSalidas\_Delete.cshtml" />
+    <Content Include="Views\OrdenSalidas\_PeticionAdmin.cshtml" />
+    <Content Include="Views\OrdenSalidas\_PeticionUser.cshtml" />
+    <Content Include="Views\OrdenEntradas\_EditarDetalles.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

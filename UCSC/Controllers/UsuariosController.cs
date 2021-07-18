@@ -31,9 +31,12 @@ namespace UCSC.Controllers
                 if(usuario != null)
                 {
 
-                    Session["usuario"] = usuario.nombre + " " + usuario.apellido;
                     Session["tipoUsuario"] = usuario.TipoUsuario.nombre;
-                    return RedirectToAction("OrdenEntrada", "OrdenEntradas");
+                    Session["usuario"] = usuario.nombre + " " + usuario.apellido;
+
+                    Session["idusuario"] = usuario.id_usuario;
+                    Session["idTipoUsuario"] = usuario.TipoUsuario.id_tipo;
+                    return RedirectToAction("ListadoSalidas", "OrdenSalidas");
                 }
             }
 

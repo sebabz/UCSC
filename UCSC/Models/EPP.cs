@@ -30,11 +30,11 @@ namespace UCSC.Models
         public int id_estado { get; set; }
     
         public virtual Categoria Categoria { get; set; }
+        public virtual Estado Estado { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleEntrada> DetalleEntrada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleSalida> DetalleSalida { get; set; }
-        public virtual Estado Estado { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }

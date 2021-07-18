@@ -19,7 +19,7 @@
                 <th>Usuario Ingreso</th>
                 <th>Comentario</th>
                 <th>Ver detalles</th>
-                <th>Editar</th>
+                @*<th>Editar</th>*@
                 <th>Eliminar</th>
             </tr>
         </thead>
@@ -27,21 +27,21 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.id_orden</td>
-                    <td>@item.fecha.ToShortDateString()</td>
-                    <td>@item.Usuario.nombre</td>
+                    <td width="100">@item.id_orden</td>
+                    <td width="150">@item.fecha.ToShortDateString()</td>
+                    <td>@item.Usuario.email</td>
                     <td>@item.comentario</td>
                     <td style="white-space: nowrap">
                         <a href="@Url.Action("DetalleOrden","OrdenEntradas",new { id = item.id_orden })" target="_blank" class="btn btn-success">
                             <i class="fa fa-list"></i>
                         </a>
                     </td>
-                    <td>
+                    @*<td>
                         <button class="btn btn-warning" data-toggle="modal"
                                 data-url="@Url.Action("Edit","OrdenEntradas",new { id = item.id_orden })">
                             <i class="fa fa-edit"></i>
                         </button>
-                    </td>
+                    </td>*@
                     <td>
                         <button class="btn btn-danger" data-toggle="modal"
                                 data-url="@Url.Action("Delete","OrdenEntradas", new { id = item.id_orden })">

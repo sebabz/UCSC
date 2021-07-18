@@ -17,7 +17,7 @@ namespace UCSC.Models
         public int id_detalle { get; set; }
         public int id_epp { get; set; }
         public int cantidad { get; set; }
-        public int id_orden { get; set; }
+        public Nullable<int> id_orden { get; set; }
     
         public virtual OrdenEntrada OrdenEntrada { get; set; }
         public virtual EPP EPP { get; set; }

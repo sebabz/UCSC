@@ -1,32 +1,103 @@
-﻿
-@{
-    ViewBag.Title = "OrdenEntrada";
-}
-
-<div class="row wrapper border-bottom white-bg page-heading">
-    <h2>Entrada de Stock</h2>
-</div>
-
-<div class="wrapper wrapper-content animated fadeInRight">
+﻿<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox-title">
-                <h3>Ingrese los datos de la entrada de Stock</h3>
+                <h3>Ingrese Datos solicitados:</h3>
             </div>
             <div class="ibox-content">
 
+                <div class="modal-body">
+                    <input type="hidden" id="usuariopide" value=@int.Parse(Session["idusuario"].ToString()) />
+
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-1">Personal que entrega: </label>
+                    <div class="col-sm-3">
+                        <input type="text" name="user_entrega" class="form-control" id="user_entrega" />
+                    </div>
+
+
+                    <label class="col-sm-1">Centro Clinico: </label>
+                    <div class="col-sm-3">
+                        <input type="text" name="ubicacion" class="form-control" id="ubicacion" />
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-1">Carrera: </label>
+                    <div class="col-sm-3">
+                        @Html.DropDownList("carrera", null, "Seleccione Carrera", htmlAttributes: new { @class = "form-control select2" })
+                    </div>
+
+                    <label class="col-sm-1">Periodo Uso: </label>
+                    <div class="col-sm-3">
+                        <input type="text" name="periodo" class="form-control" id="periodo" />
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-1">Cantidad de alumnos: </label>
+                    <div class="col-sm-3">
+                        <input type="number" min="0" name="cantidadalumno" class="form-control" id="cantidadalumno" />
+                    </div>
+
+                    <label class="col-sm-1">Cantidad de Docentes: </label>
+                    <div class="col-sm-3">
+                        <input type="number" min="0" name="cantidaddocentes" class="form-control" id="cantidaddocentes" />
+                    </div>
+
+
+
+                </div>
+
+                <div class="form-group row">
+
+
+                    <label class="col-sm-1">Fecha solicitada: </label>
+                    <div class="col-sm-4">
+                        <input id="datepicker" width="360" high="20" />
+                        <script>
+                            $('#datepicker').datepicker({
+                                uiLibrary: 'bootstrap4'
+
+                            });
+                        </script>
+
+                    </div>
+
+                </div>
+
+
+                <hr />
+
+                <div class="ibox-title">
+                    <h3>Ingrese EPP solicitados:</h3>
+                </div>
+                <hr />
+
                 <div class="form-group row">
                     <label class="col-sm-1">Nombre: </label>
-                    <div class="col-sm-4">
-                        @Html.DropDownList("epp", null, "Seleccione epp", htmlAttributes: new { @class = "form-control select2" })
+                    <div class="col-sm-3">
+                        @Html.DropDownList("epp", null, "Seleccione EPP", htmlAttributes: new { @class = "form-control select2" })
 
                     </div>
                     <label class="col-sm-1">Cantidad: </label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input type="number" min="0" name="cantidad" class="form-control" id="cantidad" />
                     </div>
-                    <input type="button" id="agregar" value="Agregar" class="btn btn-primary" />
+
                 </div>
+                <div class="form-group row ">
+                    <div class="col-sm-4"></div>
+                    <div>
+                        <input type="button" id="agregar" value="Agregar" class="btn btn-primary " />
+                    </div>
+
+                </div>
+
                 <div>
                     <hr>
                 </div>
@@ -36,19 +107,14 @@
                         <table id="detalleEPP" class="table">
                             <thead>
                                 <tr>
-                                    <th width="100">Código</th>
+                                    <th>Código</th>
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                 </tr>
                             </thead>
                             <tbody> </tbody>
                         </table>
-
-
-
                     </div>
-                   
-                    
 
                 </div>
                 <div>
@@ -59,30 +125,42 @@
                             <input type="text" id="comentario" class="form-control" />
                         </div>
                     </div>
-                    <div>
-                        <input type="button" id="guardar" value="Guardar" class="btn btn-success" />
+                    <div class="form-group row">
+
+                        <div class="col-sm-4"></div>
+                        <div>
+                            <input type="button" id="guardar" value="Guardar" class="btn btn-success" />
+                        </div>
                     </div>
                 </div>
-               
 
             </div>
         </div>
     </div>
 </div>
 
+<script type="text/javascript">
+    $(".form_datetime").datetimepicker({
+        format: "dd MM yyyy",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left"
+    });
+</script>
+
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+
 <link href="~/Content/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
 <link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" />
 <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="~/Scripts/plugins/select2/select2.full.min.js"></script>
 <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="~/Scripts/plugins/daterangepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" crossorigin="anonymous"></script>
+
 
 <script>
-
-    
-
-
-
-    //select2
     let datos = [];
     let id_epp = 0;
     let nombre = '';
@@ -163,26 +241,43 @@
             $('#cantidad').val('');
             $('#epp').val('');
             $('#epp').select2("val", "");
-            }
+        }
 
     });
-    
+
     $('#guardar').click(function () {
         //validación de datos
+
         let error = '';
+
+        let fechacapturada = $('#datepicker').datepicker({ format: 'dd-mm-yyyy' });
+        var arregloFecha = fechacapturada.val().split("-");
+        var anio = arregloFecha[2];
+        var mes = arregloFecha[1] - 1;
+        var dia = arregloFecha[0];
+        var fecha = new Date(anio, mes, dia);
+        var newDateTime = moment(fechacapturada.val(),"MM-DD-YYYY");
 
         if (datos.length == 0)
             error += 'Debe agregar productos';
         if (error != '')
             swal('Error', error, 'warning');
         else {
-            const ordenEntrada = {
+            const ordenSalida = {
+                ubicacion: $('#ubicacion').val(),
+                id_carrera: $('#carrera').val(),
+                user_pide: $('#usuariopide').val(),
+                periodo_uso: $('#periodo').val(),
+                cant_alumnos: $('#cantidadalumno').val(),
+                fecha_requerida: newDateTime,
+                cant_docentes: $('#cantidaddocentes').val(),
                 comentario: $('#comentario').val()
+
             }
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("OrdenEntrada")',
-                data: '{orden:' + JSON.stringify(ordenEntrada) + ',detalles:' + JSON.stringify(datos) + '}',
+                url: '@Url.Action("OrdenSalida")',
+                data: '{orden:' + JSON.stringify(ordenSalida) + ',detalles:' + JSON.stringify(datos) + '}',
                 dataType: 'json',
                 contentType: 'application/json;charset=utf-8',
                 success: function (resp) {
@@ -204,11 +299,6 @@
             });
         }
     });
-    
-
-   
-
-
 
 
 </script>

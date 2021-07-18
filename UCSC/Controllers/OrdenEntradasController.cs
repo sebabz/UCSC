@@ -86,59 +86,30 @@ namespace UCSC.Controllers
         [HttpPost]
         public ActionResult Eliminar(int id)
         {
-
-            //Obtiene el objeto del modelo de orden entrada
-            var ordenentrada = db.OrdenEntrada.Find(id);
-
-            //Buscar el id detalle dependiendo del id orden
-            //Select * from detalle_entrada where id_orden = id
-            //Trae un listado (Iqueryable)
-            var listadoConjuntosDetalleEntrada = db.DetalleEntrada.Where(s => s.id_orden == id);
-
-            //esta variable se crea para capturar el id_detalle
-            int datoParaEliminar = 0;
-
-            //Ciclo para recorrer el listado de objetos detalles obtenidos por la consulta "Select * from..."
-            foreach (var fila in listadoConjuntosDetalleEntrada)
-            {
-                if (fila.id_orden == id)
-                {
-                    datoParaEliminar = fila.id_detalle;
-                    //break;
-                }
-            }
-
-            //Obtener el idDetalle para eliminar
-            var idDetalle = db.DetalleEntrada.Find(datoParaEliminar);
-
-            //Elimina el objeto detalle salida
             try
             {
-                db.DetalleEntrada.Remove(idDetalle);
+                var ordenEnt = db.OrdenEntrada.OrderBy(o => o.id_orden).Include(o => o.DetalleEntrada).First();
+
+                db.OrdenEntrada.Remove(ordenEnt);
+
                 db.SaveChanges();
+                return Json("");
             }
             catch (Exception)
             {
-
+                return Json("No se puede eliminar esta orden");
                 throw;
             }
+            
 
-            try
-            {
 
-                if (ordenentrada != null)
-                {
-                    db.OrdenEntrada.Remove(ordenentrada);
-                    db.SaveChanges();
-                    return Json("");
-                }
-            }
-            catch (Exception)
-            {
-                return Json("No se ha podido eliminar la Orden");
-            }
-            return Json("No se puede eliminar esta orden");
+
+
+            
         }
+
+            //Obtener el idDetalle para eliminar
+            
 
 
         //editar detalle de entrada
@@ -160,8 +131,30 @@ namespace UCSC.Controllers
             return Json("");
         }
 
+        public ActionResult EditarDetalles (int? id)
+        {
+            var detalleentrada = db.DetalleEntrada.Find(id);
+            ViewBag.epp = new SelectList(db.EPP, "id_epp", "nombre", detalleentrada.id_epp);
+            return PartialView("_EditarDetalles", detalleentrada);
+        }
 
-
+        [HttpPost]
+        public ActionResult EditarDetalles(DetalleEntrada detalleentrada)
+        {
+            try
+            {
+                db.Entry(detalleentrada).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json("");
+            }
+            catch (Exception ex)
+            {
+                return Json("No se ha podido editar");
+                throw;
+            }
+            
+            
+        }
 
 
     }
