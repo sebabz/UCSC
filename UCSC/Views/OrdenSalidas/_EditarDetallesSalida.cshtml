@@ -1,0 +1,92 @@
+﻿@model UCSC.Models.DetalleSalida
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Editar Detalle Pedido EPP</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <input type="hidden" id="id_detalle" value="@Model.id_detalle" />
+            <input type="hidden" id="id_orden" value="@Model.id_orden" />
+
+
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Producto:</label>
+                <div class="col-10">
+                    @Html.DropDownList("epp", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 text-right">Cantidad:</label>
+                <div class="col-10">
+                    <input type="number" name="cantidad" id="cantidad" value="@Model.cantidad" class="form-control solonumeros" />
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <input type="button" value="Editar" class="btn btn-primary" id="editar" />
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+
+<script>
+    $('#editar').click(function () {
+        let error = '';
+
+        if ($('#cantidad').val() === '')
+            error += 'Debe ingresar cantidad \n';
+
+
+        if (error != '') {
+            swal('Error validación', error, 'error');
+        }
+        else
+        {
+            const epp = {
+                id_detalle: $('#id_detalle').val(),
+                id_epp: $('#epp').val(),
+                cantidad: $('#cantidad').val(),
+                id_orden: $('#id_orden').val()
+
+
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("EditarDetallesSalida")',
+                data: '{detallesalida:' + JSON.stringify(epp) + '}',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (resp) {
+                    if (resp == "") {
+                        $('#modalEdit').modal('hide');
+                        swal({
+                            title: 'Modificar Detalle',
+                            text: 'Los datos se han guardado con éxito!',
+                            icon: 'success',
+                            button: 'Cerrar',
+
+                            closeOnClickOutside: false,
+                        }).then(function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+
+</script>

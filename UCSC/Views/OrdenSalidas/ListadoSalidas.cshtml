@@ -9,8 +9,7 @@
 
 </div>
 <hr />
-@if (Session["tipoUsuario"] != null)
-{
+
 
 
 
@@ -31,8 +30,8 @@
                 <th>Fecha Requerida</th>
                 <th>Comentario</th>
                 <th>Estado</th>
-                <th>Ver detalles</th>
-                <th>Editar</th>
+                <th>Ver y editar detalles</th>
+                <th>Editar Orden</th>
                 <th>Eliminar</th>
             </tr>
         </thead>
@@ -85,8 +84,8 @@
                     <tr>
                         <td>@item.id_orden</td>
                         <td>@item.fecha_orden.ToShortDateString()</td>
-                        <td>@item.Usuario.nombre</td>
-                        <td>@item.Usuario.nombre</td>
+                        <td>@item.Usuario.email</td>
+                        <td>@item.Usuario1.email</td>
                         <td>@item.ubicacion</td>
                         <td>@item.Carrera.nombre_carrera</td>
                         <td>@item.periodo_uso</td>
@@ -120,11 +119,6 @@
     </table>
 </div>
 
-}
-else
-{
-    Response.Redirect("~/Usuarios/Login");
-}
 
 
 <script src="~/Scripts/plugins/moment.min.js"></script>

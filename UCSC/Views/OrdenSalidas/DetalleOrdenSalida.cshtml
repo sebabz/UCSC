@@ -14,7 +14,7 @@
                     </div>
                     <label class="col-2 text-right">Usuario Ingreso: </label>
                     <div class="col-sm-2">
-                        <label>@Model.Usuario.nombre</label>
+                        <label>@Model.Usuario.email</label>
                     </div>
                     <label class="col-2 text-right">Fecha Ingreso: </label>
                     <div class="col-sm-2">
@@ -30,6 +30,7 @@
                                 <th>Código Producto</th>
                                 <th>Nombre</th>
                                 <th>Cantidad</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,12 @@
                                     <td>@item.EPP.id_epp</td>
                                     <td>@item.EPP.nombre</td>
                                     <td>@item.cantidad</td>
+                                    <td>
+                                        <button class="btn btn-warning" data-toggle="modal"
+                                                data-url="@Url.Action("EditarDetallesSalida","OrdenSalidas",new { id = item.id_detalle })">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -51,3 +58,33 @@
         </div>
     </div>
 </div>
+
+
+<script src="~/Scripts/plugins/moment.min.js"></script>
+
+
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#tabla').DataTable();
+    });
+</script>
+
+<div class="modal fade" id="modalEdit"></div>
+
+<script>
+    $('.btn-warning').click(function () {
+        let url = $(this).data('url');
+        $.get(url, function (data) {
+            $('#modalEdit').html(data);
+            $('#modalEdit').modal('show');
+        });
+    });
+
+
+</script>

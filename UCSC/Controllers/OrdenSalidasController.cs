@@ -137,5 +137,31 @@ namespace UCSC.Controllers
             }
         }
 
+        public ActionResult EditarDetallesSalida (int? id)
+        {
+            var detallesalida = db.DetalleSalida.Find(id);
+            ViewBag.epp = new SelectList(db.EPP, "id_epp", "nombre", detallesalida.id_epp);
+            return PartialView("_EditarDetallesSalida", detallesalida);
+        }
+
+        [HttpPost]
+        public ActionResult EditarDetallesSalida (DetalleSalida detallesalida)
+        {
+            try
+            {
+                db.Entry(detallesalida).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json("");
+            }
+            catch (Exception ex)
+            {
+                return Json("No se ha podido editar");
+                throw;
+            }
+
+
+        }
+
+
     }
 }

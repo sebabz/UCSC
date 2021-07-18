@@ -325,6 +325,7 @@
     <Content Include="Views\OrdenSalidas\_PeticionUser.cshtml" />
     <Content Include="Views\OrdenEntradas\_EditarDetalles.cshtml" />
     <Content Include="Views\OrdenSalidas\_EditarOrden.cshtml" />
+    <Content Include="Views\OrdenSalidas\_EditarDetallesSalida.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
