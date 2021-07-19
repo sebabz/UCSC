@@ -3,11 +3,14 @@
 @{
     ViewBag.Title = "EPP";
 }
-
+@if (Session["tipoUsuario"].Equals("Usuario"))
+{
+    Response.Redirect("~/OrdenSalidas/OrdenSalida");
+}
 
 
 <div class="row wrapper border-bottom white-bg page-heading">
-<h2>Gestionar EPP</h2>
+    <h2>Gestionar EPP</h2>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">

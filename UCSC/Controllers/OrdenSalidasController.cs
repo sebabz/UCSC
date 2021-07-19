@@ -30,6 +30,7 @@ namespace UCSC.Controllers
             orden.fecha_orden = DateTime.Now;
             orden.user_entrega = 1015;
             orden.id_estado = 5;
+            bool actualizado = false;
                         
             db.OrdenSalida.Add(orden);
             db.SaveChanges();
@@ -42,20 +43,37 @@ namespace UCSC.Controllers
                 item.id_orden = idDet;
                 db.DetalleSalida.Add(item);
                 
-                ActualizaStock((int)item.id_epp, item.cantidad);
-                db.SaveChanges();
+                actualizado = ActualizaStock((int)item.id_epp, item.cantidad);
+
+                if (actualizado)
+                {
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.OrdenSalida.Remove(orden);
+                    db.SaveChanges();
+                    return Json("no");
+                }
+                
             }
 
             return Json("");
         }
 
-        public void ActualizaStock(int id_epp, int cantidad)
+        public bool ActualizaStock(int id_epp, int cantidad)
         {
-
+            bool actualizadoCorrectamente = false;
             var epp = db.EPP.Find(id_epp);
 
-            epp.cantidad = epp.cantidad - cantidad;
-            db.Entry(epp).State = EntityState.Modified;
+            if (epp.cantidad > cantidad)
+            {
+                epp.cantidad = epp.cantidad - cantidad;
+                db.Entry(epp).State = EntityState.Modified;
+                actualizadoCorrectamente = true;
+            }
+
+            return actualizadoCorrectamente;
         }
 
         public ActionResult ListadoSalidas()

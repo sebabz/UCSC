@@ -258,6 +258,29 @@
         var fecha = new Date(anio, mes, dia);
         var newDateTime = moment(fechacapturada.val(),"MM-DD-YYYY");
 
+        if (arregloFecha == '') {
+            error += 'Ingrese fecha \n';
+        }
+        if (newDateTime < new Date($.now())) {
+            error += 'Ingrese fecha superior a la de hoy \n';
+        }
+        if ($('#ubicacion').val().trim() == '') {
+            error += 'Campo Clinico no puede estar vacio\n'
+        }
+        if ($('#carrera').val() == '') {
+            error += 'Carrera no puede estar vacio\n'
+        }
+        if ($('#periodo').val().trim() == '') {
+            error += 'Periodo de uso no puede estar vacio\n'
+        }
+        if ($('#cantidadalumno').val() == '') {
+            error += 'Cantidad de Alumnos no puede estar vacio \n'
+        }
+        if ($('#cantidaddocentes').val() == '') {
+            error += 'Cantidad Docentes no puede estar vacio \n'
+        }
+
+
         if (datos.length == 0)
             error += 'Debe agregar productos';
         if (error != '')
@@ -293,6 +316,15 @@
                                 location.reload();//recarga la página
                             }
                         });
+                    }
+                    else {
+                        swal({
+                            title: 'Ingreso',
+                            text: 'Error, alguno de los EPP no tiene stock suficiente',
+                            icon: 'error',
+                            button: 'Cerrar',
+                            closeOnClickOutside: true,
+                        })
                     }
                 }
 

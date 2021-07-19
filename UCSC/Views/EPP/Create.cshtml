@@ -2,6 +2,13 @@
 @{
     ViewBag.Title = "Agregar EPP";
 }
+
+@if (Session["tipoUsuario"].Equals("Usuario"))
+{
+    Response.Redirect("~/OrdenSalidas/OrdenSalida");
+}
+
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <h2>Crear EPP</h2>
 </div>
@@ -64,12 +71,12 @@
 
         if ($('#nombre').val().trim() === '')
             error += 'Debe ingresar nombre \n';
-                
+
         if ($('#categoria').val() === '')
             error += 'Debe ingresar categoria \n';
         if ($('#usuario').val() === '')
             error += 'Debe ingresar usuario \n';
-        
+
         if (error != '') {
             swal('Error validación', error, 'error');
         }
@@ -104,7 +111,7 @@
                         }).then(function (isConfirm) {
                             if (isConfirm) {
                                 location.reload();//recarga la página
-                               
+
                             }
                         });
                     } else {

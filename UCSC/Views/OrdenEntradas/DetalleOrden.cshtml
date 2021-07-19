@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "DetalleOrden";
 }
-
+@if (Session["tipoUsuario"].Equals("Usuario"))
+{
+    Response.Redirect("~/OrdenSalidas/OrdenSalida");
+}
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -86,6 +89,6 @@
             $('#modalEdit').modal('show');
         });
     });
- 
+
 
 </script>

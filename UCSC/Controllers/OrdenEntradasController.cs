@@ -102,17 +102,9 @@ namespace UCSC.Controllers
             }
             
 
-
-
-
-            
         }
 
-            //Obtener el idDetalle para eliminar
-            
-
-
-        //editar detalle de entrada
+          
         public ActionResult Edit(int? id)
         {
             ViewBag.epp = new SelectList(db.EPP, "id_epp", "nombre");

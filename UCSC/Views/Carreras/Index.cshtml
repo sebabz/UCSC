@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@if (Session["tipoUsuario"].Equals("Usuario"))
+{
+    Response.Redirect("~/OrdenSalidas/OrdenSalida");
+}
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <h2>Gestionar Carreras</h2>
@@ -25,19 +28,19 @@
 
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>@item.nombre_carrera</td>
-                            <td>
-                                <button class="btn btn-warning" data-toggle="modal"
-                                        data-url="@Url.Action("Edit","Carreras",new { id = item.id_carrera })">
-                                    <i class="fa fa-edit"></i> Editar
-                                </button>
-                                <button class="btn btn-danger" data-toggle="modal"
-                                        data-url="@Url.Action("Delete","Carreras", new { id = item.id_carrera })">
-                                    <i class="fa fa-trash"></i> Eliminar
-                                </button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>@item.nombre_carrera</td>
+                                <td>
+                                    <button class="btn btn-warning" data-toggle="modal"
+                                            data-url="@Url.Action("Edit","Carreras",new { id = item.id_carrera })">
+                                        <i class="fa fa-edit"></i> Editar
+                                    </button>
+                                    <button class="btn btn-danger" data-toggle="modal"
+                                            data-url="@Url.Action("Delete","Carreras", new { id = item.id_carrera })">
+                                        <i class="fa fa-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
                         }
 
 

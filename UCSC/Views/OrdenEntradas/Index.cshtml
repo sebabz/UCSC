@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@if (Session["tipoUsuario"].Equals("Usuario"))
+{
+    Response.Redirect("~/OrdenSalidas/OrdenSalida");
+}
 <div>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
     <h2>Historial Ordenes de entradas</h2>
@@ -37,11 +40,11 @@
                         </a>
                     </td>
                     @*<td>
-                        <button class="btn btn-warning" data-toggle="modal"
-                                data-url="@Url.Action("Edit","OrdenEntradas",new { id = item.id_orden })">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>*@
+                            <button class="btn btn-warning" data-toggle="modal"
+                                    data-url="@Url.Action("Edit","OrdenEntradas",new { id = item.id_orden })">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>*@
                     <td>
                         <button class="btn btn-danger" data-toggle="modal"
                                 data-url="@Url.Action("Delete","OrdenEntradas", new { id = item.id_orden })">

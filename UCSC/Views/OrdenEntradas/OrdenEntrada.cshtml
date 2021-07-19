@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "OrdenEntrada";
 }
-
+@if (Session["tipoUsuario"].Equals("Usuario"))
+{
+    Response.Redirect("~/OrdenSalidas/OrdenSalida");
+}
 <div class="row wrapper border-bottom white-bg page-heading">
     <h2>Entrada de Stock</h2>
 </div>
@@ -47,8 +50,8 @@
 
 
                     </div>
-                   
-                    
+
+
 
                 </div>
                 <div>
@@ -63,7 +66,7 @@
                         <input type="button" id="guardar" value="Guardar" class="btn btn-success" />
                     </div>
                 </div>
-               
+
 
             </div>
         </div>
@@ -78,7 +81,7 @@
 
 <script>
 
-    
+
 
 
 
@@ -166,7 +169,7 @@
             }
 
     });
-    
+
     $('#guardar').click(function () {
         //validación de datos
         let error = '';
@@ -204,9 +207,9 @@
             });
         }
     });
-    
 
-   
+
+
 
 
 

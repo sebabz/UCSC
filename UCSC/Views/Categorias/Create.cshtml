@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "Create";
 }
-
+@if (Session["tipoUsuario"].Equals("Usuario"))
+{
+    Response.Redirect("~/OrdenSalidas/OrdenSalida");
+}
 <div class="row wrapper border-bottom white-bg page-heading">
     <h2>Crear Categoría</h2>
 </div>
@@ -50,7 +53,7 @@
 
         $('#nombre').val('');
         $('#descripcion').val('');
-        
+
     });
 
 </script>

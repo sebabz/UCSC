@@ -2,6 +2,11 @@
 @{
     ViewBag.Title = "Agregar Usuario";
 }
+@if (Session["tipoUsuario"].Equals("Usuario"))
+{
+    Response.Redirect("~/OrdenSalidas/OrdenSalida");
+}
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <h2>Crear Usuario</h2>
 </div>
@@ -48,8 +53,8 @@
                         <input type="password" name="pass" id="pass" class="form-control form-control-sm" />
                     </div>
                 </div>
-                                
-                                              
+
+
                 <div class="form-group row">
                     <label class="col-2 text-right">Tipo Usuario:</label>
                     <div class="col-10">
@@ -76,7 +81,7 @@
 
 <script>
 
-    
+
 
     //expresión relugar para permitir sólo números positivos
     $('.solonumeros').on('input', function () {
@@ -104,14 +109,14 @@
         if ($('#rut').val().trim() === '')
             error += 'Debe ingresar Rut \n';
 
-      
+
 
 
         if ($('#email').val().trim() === '')
             error += 'Debe ingresar un correo \n';
         if ($('#pass').val().trim() === '')
             error += 'Debe ingresar contraseña \n';
-        
+
         if ($('#tipo').val() === '')
             error += 'Debe ingresar tipo de usuario \n';
 
@@ -166,8 +171,8 @@
         limpiar();
     });
 
-    
-   
+
+
 
     function limpiar() {
 
