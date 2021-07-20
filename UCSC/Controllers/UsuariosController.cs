@@ -36,6 +36,12 @@ namespace UCSC.Controllers
 
                     Session["idusuario"] = usuario.id_usuario;
                     Session["idTipoUsuario"] = usuario.TipoUsuario.id_tipo;
+                    Session["EstadoUsuario"] = usuario.Estado.nombre;
+                    if(usuario.Estado.nombre == "Suspendido")
+                    {
+                        
+                        return RedirectToAction("Login", "Usuarios");
+                    }
                     return RedirectToAction("ListadoSalidas", "OrdenSalidas");
                 }
             }

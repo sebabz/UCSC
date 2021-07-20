@@ -41,7 +41,7 @@
 
                 int idUsuario = int.Parse(Session["idusuario"].ToString());
 
-                if ( int.Parse(Session["idTipoUsuario"].ToString()) == 2009 && item.user_pide == idUsuario)
+                if (int.Parse(Session["idTipoUsuario"].ToString()) == 2009 && item.user_pide == idUsuario)
                 {
                     <tr>
                         <td>@item.id_orden</td>
@@ -113,10 +113,12 @@
                         </td>
                     </tr>
                 }
-             }
+            }
 
         </tbody>
     </table>
+    <button id="botonexcel" class="btn btn-success">Exportar a Excel</button>
+    <button id="botonpdf" class="btn btn-secondary">Exportar a PDF</button>
 </div>
 
 
@@ -127,6 +129,10 @@
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
 
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<script src="~/Scripts/tableHTMLExport.js"></script>
+<script src="~/Scripts/jspdf.min.js"></script>
+<script src="~/Scripts/jspdf.plugin.autotable.min.js"></script>
 
 
 
@@ -153,5 +159,34 @@
             $('#modalDelete').modal('show');
         });
     });
+
+    $("#botonexcel").click(function () {
+
+        $("#tabla").table2excel({
+
+            // exclude CSS class
+
+            exclude: ".noExl",
+
+            name: "Worksheet Name",
+
+            filename: "SomeFile",//do not include extension
+
+            fileext: ".xls" // file extension
+
+        });
+
+    });
+
+    $("#botonpdf").click(function () {
+        $("#tabla").tableHTMLExport({
+
+            // csv, txt, json, pdf
+            type: 'pdf'
+          
+
+        });
+    });
+    
 
 </script>
